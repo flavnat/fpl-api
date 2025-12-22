@@ -1,0 +1,38 @@
+{
+  "name": "fpl-api",
+  "version": "1.0.0",
+  "main": "dist/src/app.js",
+  "repository": "git@github.com:flavnat/fpl-api.git",
+  "author": "flavnat <natnael01ayele@gmail.com>",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc-alias",
+    "dev": "tsx watch src/app.ts",
+    "start": "node dist/src/app.js",
+    "db:show": "tsx node_modules/drizzle-kit/bin.cjs studio --config ./drizzle.config.ts",
+    "db:generate": "tsx node_modules/drizzle-kit/bin.cjs generate --config ./drizzle.config.ts",
+    "db:push": "tsx node_modules/drizzle-kit/bin.cjs push --config ./drizzle.config.ts",
+    "db:migrate": "tsx src/db/migrate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "@types/pg": "^8.16.0",
+    "@types/pino-pretty": "^5.0.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "better-auth": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
+    "drizzle-zod": "^0.8.3",
+    "fastify": "^5.6.2",
+    "fastify-plugin": "^5.1.0",
+    "pg": "^8.16.3",
+    "zod": "^4.2.1"
+  }
+}
