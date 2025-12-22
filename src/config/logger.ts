@@ -1,4 +1,4 @@
-import type { FastifyReply } from "fastify";
+import type { FastifyReply } from 'fastify'
 
 export const envToLogger = {
   development: {
@@ -11,10 +11,10 @@ export const envToLogger = {
       serializers: {
         res(reply: FastifyReply) {
           return {
-            statusCode: reply.statusCode
+            statusCode: reply.statusCode,
           }
-        }
-      }
+        },
+      },
     },
   },
   production: true,

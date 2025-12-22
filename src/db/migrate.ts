@@ -1,9 +1,9 @@
-import { migrate } from 'drizzle-orm/node-postgres/migrator'
-import { drizzle } from 'drizzle-orm/node-postgres'
-import { Pool } from 'pg'
-import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { env } from '../config/env.js';
+import { fileURLToPath } from 'node:url'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { migrate } from 'drizzle-orm/node-postgres/migrator'
+import { Pool } from 'pg'
+import { env } from '../config/env.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -23,10 +23,12 @@ async function runMigrations() {
       migrationsFolder: join(__dirname, '../../drizzle'),
     })
     console.log('✓ Migrations completed!')
-  } catch (error) {
+  }
+  catch (error) {
     console.error('✗ Migration failed:', error)
     process.exit(1)
-  } finally {
+  }
+  finally {
     await pool.end()
   }
 }

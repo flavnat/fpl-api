@@ -1,12 +1,14 @@
 {
   "name": "fpl-api",
-  "version": "1.0.0",
-  "main": "dist/src/app.js",
-  "repository": "git@github.com:flavnat/fpl-api.git",
-  "author": "flavnat <natnael01ayele@gmail.com>",
   "type": "module",
+  "version": "1.0.0",
+  "author": "flavnat <natnael01ayele@gmail.com>",
   "license": "MIT",
+  "repository": "git@github.com:flavnat/fpl-api.git",
+  "main": "dist/src/app.js",
   "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "build": "tsc -p tsconfig.json && tsc-alias",
     "dev": "tsx watch src/app.ts",
     "start": "node dist/src/app.js",
@@ -14,14 +16,6 @@
     "db:generate": "tsx node_modules/drizzle-kit/bin.cjs generate --config ./drizzle.config.ts",
     "db:push": "tsx node_modules/drizzle-kit/bin.cjs push --config ./drizzle.config.ts",
     "db:migrate": "tsx src/db/migrate.ts"
-  },
-  "devDependencies": {
-    "@types/node": "^25.0.3",
-    "@types/pg": "^8.16.0",
-    "@types/pino-pretty": "^5.0.0",
-    "tsc-alias": "^1.8.16",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
@@ -34,5 +28,16 @@
     "fastify-plugin": "^5.1.0",
     "pg": "^8.16.3",
     "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.7.3",
+    "@types/node": "^25.0.3",
+    "@types/pg": "^8.16.0",
+    "@types/pino-pretty": "^5.0.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-format": "^1.1.0",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
