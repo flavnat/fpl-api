@@ -38,7 +38,7 @@ export const fixtures = pgTable('fixtures', {
 })
 
 export const fixtureStats = pgTable('fixture_stats', {
-  id: integer('id').primaryKey(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   fixture_id: integer('fixture_id')
     .references(() => fixtures.id, { onDelete: 'cascade' })
     .notNull(),
@@ -46,7 +46,7 @@ export const fixtureStats = pgTable('fixture_stats', {
 })
 
 export const fixtureStatValues = pgTable('fixture_stat_values', {
-  id: integer('id').primaryKey(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   stat: integer('stat_id')
     .references(() => fixtureStats.id, { onDelete: 'cascade' })
     .notNull(),
