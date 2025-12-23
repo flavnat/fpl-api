@@ -21,7 +21,7 @@ export interface MatchStat {
 export const fixtures = pgTable('fixtures', {
   id: integer('id').primaryKey(),
   code: integer('code').notNull(),
-  event_id: integer('event_id').references(() => events.id),
+  event: integer('event_id').references(() => events.id),
   team_h: integer('team_h').references(() => teams.id).notNull(),
   team_a: integer('team_a').references(() => teams.id).notNull(),
   team_h_score: integer('team_h_score'),
