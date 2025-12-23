@@ -43,7 +43,6 @@ export async function getFixtures(params: any) {
     const fixtureIds = fixtureList.map(f => f.id)
     const eventIds = [...new Set(fixtureList.map(f => f.event).filter(Boolean) as number[])]
 
-    // 4. Fetch Stats Data
     const rawStats = await db
       .select({
         fixture_id: fixtureStats.fixture_id,
@@ -62,7 +61,7 @@ export async function getFixtures(params: any) {
       db.select().from(teams),
       eventIds.length > 0 ? db.select().from(events).where(inArray(events.id, eventIds)) : Promise.resolve([]),
       involvedPlayerIds.length > 0 ? db.select().from(elements).where(inArray(elements.id, involvedPlayerIds)) : Promise.resolve([]),
-      db.select().from(syncState).where(eq(syncState.key, 'bootstrap_all')).limit(1),
+      db.select().from(syncState).where(eq(syncState.key, 'fixtures')).limit(1),
     ])
 
     const teamMap = Object.fromEntries(allTeams.map(t => [t.id, t]))
