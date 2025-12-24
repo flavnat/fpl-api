@@ -23,7 +23,6 @@
     "@pothos/plugin-drizzle": "^0.16.1",
     "better-auth": "^1.4.7",
     "dotenv": "^17.2.3",
-    "drizzle-graphql": "^0.8.5",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "drizzle-zod": "^0.8.3",
