@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm'
 import { request } from 'undici'
 import { elements, syncState } from '../../db/schema.js'
 import { db } from '../../plugins/db.js'
+import { getPlayerPhotoUrl, toDecimal } from '../../utils/elements-utils.js'
 
 const FPL_URL = 'https://fantasy.premierleague.com/api/elements/'
 
@@ -119,8 +120,8 @@ export async function syncElements() {
       in_dreamteam: e.in_dreamteam,
       news: e.news,
       news_added: e.news_added,
-      now_cost: e.now_cost,
-      photo: e.photo,
+      now_cost: toDecimal(e.now_cost),
+      photo: getPlayerPhotoUrl(e.photo),
       points_per_game: Number.parseFloat(e.points_per_game) || 0,
       removed: e.removed,
       second_name: e.second_name,
