@@ -1,11 +1,17 @@
-// src/graphql/index.ts
-import { buildSchema } from 'drizzle-graphql'
-import * as schema from '../db/schema' // Import all your tables
-import { db } from '../plugins/db'
+import { elementsResolver } from '../modules/elements/elements.resolver.js'
+import { elementsTypeDef } from '../modules/elements/elements.typeDef.js'
 
-const { entities } = buildSchema(db)
+const baseTypeDefs = `
+  type Query {
+    _root: String
+  }
+`
 
-export const graphQLConfig = {
-  schema: entities,
-  graphiql: true,
+export const schema = [baseTypeDefs, elementsTypeDef]
+
+export const resolvers = {
+  Query: {
+    ...elementsResolver.Query,
+  },
+  Element: elementsResolver.Element,
 }
