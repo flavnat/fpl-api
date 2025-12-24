@@ -16,7 +16,11 @@ const pool = new Pool({
   connectionString: env.DATABASE_URL_LOCAL,
 })
 
-export const db = drizzle(pool, { schema: { ...schema, ...relations } })
+export const db = drizzle(
+  pool,
+  { schema: { ...schema, ...relations }, logger: true },
+
+)
 
 export default fp(async (fastify) => {
   fastify.decorate('db', db)

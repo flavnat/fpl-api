@@ -1,11 +1,4 @@
 export const elementsTypeDef = `
-  type Team {
-    id: Int
-    name: String
-    played: Int
-    short_name: String
-  }
-  
   type ElementType {
     id: Int
     singular_name: String
