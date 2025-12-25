@@ -1,11 +1,4 @@
 export const elementsTypeDef = `
-  type ElementType {
-    id: Int
-    singular_name: String
-    singular_name_short: String
-    plural_name: String
-    element_count: Int
-  }
 
   type Element {
     id: Int!
