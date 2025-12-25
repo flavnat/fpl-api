@@ -1,10 +1,10 @@
 import { sql } from 'drizzle-orm'
 import { request } from 'undici'
+import { FPL_API } from '../../config/fpl-api.js'
 import { elements, syncState } from '../../db/schema.js'
 import { db } from '../../plugins/db.js'
-import { getPlayerPhotoUrl, toDecimal } from '../../utils/elements-utils.js'
 
-const FPL_URL = 'https://fantasy.premierleague.com/api/elements/'
+import { getPlayerPhotoUrl, toDecimal } from '../../utils/elements-utils.js'
 
 const UPSERT_COLUMNS = [
   'can_transact',
@@ -82,7 +82,7 @@ type UpsertColumn = (typeof UPSERT_COLUMNS)[number]
 
 export async function syncElements() {
   try {
-    const { body, statusCode } = await request(FPL_URL, {
+    const { body, statusCode } = await request(FPL_API.ELEMENTS, {
       headers: {
         'user-agent': 'Mozilla/5.0',
       },

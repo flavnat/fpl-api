@@ -1,6 +1,7 @@
 import type { InferInsertModel } from 'drizzle-orm'
 import { getTableColumns, sql } from 'drizzle-orm'
 import { request } from 'undici'
+import { FPL_API } from '../../config/fpl-api.js'
 import { events, syncState } from '../../db/schema.js'
 import { db } from '../../plugins/db.js'
 
@@ -8,8 +9,7 @@ type NewEvent = InferInsertModel<typeof events>
 
 export async function syncEvents() {
   try {
-    const URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
-    const { body } = await request(URL)
+    const { body } = await request(FPL_API.BOOTSTRAP_STATIC)
     const data: any = await body.json()
 
     const eventsToSync: NewEvent[] = data.events.map((e: any) => ({
