@@ -1,13 +1,13 @@
 import { sql } from 'drizzle-orm'
 import { request } from 'undici'
+import { FPL_API } from '../../config/fpl-api.js'
 import { fixtures, fixtureStats, fixtureStatValues, syncState } from '../../db/schema.js'
-import { db } from '../../plugins/db.js'
 
-const FIXTURES_URL = 'https://fantasy.premierleague.com/api/fixtures/'
+import { db } from '../../plugins/db.js'
 
 export async function syncFixtures() {
   try {
-    const { body } = await request(FIXTURES_URL, {
+    const { body } = await request(FPL_API.FIXTURES, {
       headers: { 'user-agent': 'Mozilla/5.0' },
     })
     const data: any = await body.json()
@@ -18,7 +18,7 @@ export async function syncFixtures() {
           .values({
             id: f.id,
             code: f.code,
-            event_id: f.event,
+            event: f.event,
             team_h: f.team_h,
             team_a: f.team_a,
             team_h_score: f.team_h_score,
@@ -95,7 +95,7 @@ export async function syncFixtures() {
         })
     })
 
-    return { success: true }
+    return { count: data.length }
   }
   catch (error: any) {
     console.error('Fixture Sync Failed:', error)

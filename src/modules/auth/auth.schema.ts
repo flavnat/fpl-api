@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { boolean, index, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -57,6 +57,31 @@ export const account = pgTable(
   table => [index('account_userId_idx').on(table.userId)],
 )
 
+export const apiKey = pgTable('api_key', {
+  id: text('id').primaryKey(),
+  key: text('key').notNull().unique(),
+  name: text('name'),
+  userId: text('user_id')
+    .references(() => user.id, { onDelete: 'cascade' })
+    .notNull(),
+  prefix: text('prefix'),
+  permissions: text('permissions'),
+  refillInterval: integer('refill_interval'),
+  refillAmount: integer('refill_amount'),
+  lastRefillAt: timestamp('last_refill_at'),
+  enabled: boolean('enabled'),
+  rateLimitEnabled: boolean('rate_limit_enabled'),
+  rateLimitTimeWindow: integer('rate_limit_time_window'),
+  rateLimitMax: integer('rate_limit_max'),
+  expiresAt: timestamp('expires_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+  metadata: text('metadata'),
+})
+
 export const verification = pgTable(
   'verification',
   {
@@ -76,6 +101,7 @@ export const verification = pgTable(
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  apiKeys: many(apiKey),
 }))
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -88,6 +114,13 @@ export const sessionRelations = relations(session, ({ one }) => ({
 export const accountRelations = relations(account, ({ one }) => ({
   user: one(user, {
     fields: [account.userId],
+    references: [user.id],
+  }),
+}))
+
+export const apiKeyRelations = relations(apiKey, ({ one }) => ({
+  user: one(user, {
+    fields: [apiKey.userId],
     references: [user.id],
   }),
 }))

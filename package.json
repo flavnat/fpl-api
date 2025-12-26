@@ -18,7 +18,14 @@
     "db:migrate": "tsx src/db/migrate.ts"
   },
   "dependencies": {
+    "@fastify/compress": "^8.3.1",
     "@fastify/cors": "^11.2.0",
+    "@fastify/helmet": "^13.0.2",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/swagger": "^9.6.1",
+    "@fastify/swagger-ui": "^5.2.3",
+    "@pothos/core": "^4.10.0",
+    "@pothos/plugin-drizzle": "^0.16.1",
     "better-auth": "^1.4.7",
     "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.8",
@@ -26,6 +33,8 @@
     "drizzle-zod": "^0.8.3",
     "fastify": "^5.6.2",
     "fastify-plugin": "^5.1.0",
+    "graphql": "^16.12.0",
+    "mercurius": "^16.6.0",
     "pg": "^8.16.3",
     "undici": "^7.16.0",
     "zod": "^4.2.1"

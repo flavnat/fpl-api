@@ -1,27 +1,34 @@
-import Fastify from 'fastify'
 import { env } from './config/env.js'
-import { envToLogger } from './config/logger.js'
-import db from './plugins/db.js'
-
-const fastify = Fastify({
-  logger: envToLogger.development ?? true,
-})
-
-fastify.get('/health', async () => {
-  return {
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-  }
-})
+import { createServer } from './server.js'
+import { setupGracefulShutdown } from './utils/graceful-shutdown.js'
 
 async function start() {
   try {
-    await fastify.register(db)
+    const fastify = await createServer()
 
-    await fastify.listen({ port: Number(env.PORT) || 3000, host: '0.0.0.0' })
+    // Setup graceful shutdown
+    setupGracefulShutdown(fastify)
+
+    // Start server
+    await fastify.listen({
+      port: env.PORT,
+      host: '0.0.0.0',
+    })
+
+    fastify.log.info(`Server listening on port ${env.PORT}`)
+    fastify.log.info(`Environment: ${env.NODE_ENV}`)
+    fastify.log.info(`GraphQL endpoint: http://localhost:${env.PORT}/graphql`)
+    
+    if (env.ENABLE_GRAPHIQL) {
+      fastify.log.info(`GraphiQL: http://localhost:${env.PORT}/graphiql`)
+    }
+    
+    if (env.ENABLE_SWAGGER) {
+      fastify.log.info(`API Documentation: http://localhost:${env.PORT}/documentation`)
+    }
   }
   catch (err) {
-    fastify.log.error(err)
+    console.error('Failed to start server:', err)
     process.exit(1)
   }
 }

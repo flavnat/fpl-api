@@ -1,9 +1,9 @@
 import { sql } from 'drizzle-orm'
 import { request } from 'undici'
+import { FPL_API } from '../../config/fpl-api.js'
 import { syncState, teams } from '../../db/schema.js'
-import { db } from '../../plugins/db.js'
 
-const FPL_URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
+import { db } from '../../plugins/db.js'
 
 const UPSERT_COLUMNS = [
   'code',
@@ -32,7 +32,7 @@ type UpsertColumn = (typeof UPSERT_COLUMNS)[number]
 
 export async function syncTeams() {
   try {
-    const { body } = await request(FPL_URL)
+    const { body } = await request(FPL_API.BOOTSTRAP_STATIC)
     const data: any = await body.json()
 
     const teamsToSync = data.teams.map((t: any) => ({

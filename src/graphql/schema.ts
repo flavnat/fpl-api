@@ -1,0 +1,20 @@
+import { elementTypesTypeDef } from '../modules/element-types/element-types.typeDef.js'
+import { elementsTypeDef } from '../modules/elements/elements.typeDef.js'
+import { eventsTypeDef } from '../modules/events/events.typeDef.js'
+import { fixturesTypeDef } from '../modules/fixtures/fixtures.typeDef.js'
+import { teamsTypeDef } from '../modules/teams/teams.typeDef.js'
+
+export const schema = [
+  `type PaginationMeta {
+    total: Int!
+    limit: Int!
+    offset: Int!
+    lastSynced: String
+  }`,
+  `type Query { _root: String }`,
+  elementsTypeDef,
+  fixturesTypeDef,
+  teamsTypeDef,
+  eventsTypeDef,
+  elementTypesTypeDef,
+]
