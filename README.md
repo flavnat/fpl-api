@@ -58,6 +58,89 @@ An unofficial **Fantasy Premier League (FPL) API** built with **Fastify**, **Gra
 
 The API will be available at `http://localhost:3000`
 
+## API Key Authentication
+
+The FPL API uses API key authentication to protect endpoints. You need an API key to access GraphQL and sync endpoints.
+
+### Step 1: Generate Your API Key
+
+Generate a secure random API key using one of these methods:
+
+**Option A: Using Node.js**
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+**Option B: Using OpenSSL**
+```bash
+openssl rand -hex 32
+```
+
+**Option C: Using online generator**
+Use a secure password generator to create a 64-character hexadecimal string.
+
+Example output:
+```
+a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456
+```
+
+### Step 2: Configure Your API Key
+
+1. Open your `.env` file
+2. Set the `API_KEY` variable with your generated key:
+
+```env
+API_KEY=a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456
+```
+
+> ⚠️ **Important**: Never commit your `.env` file to version control. Keep your API key secret!
+
+### Step 3: Using Your API Key
+
+Include your API key in the `x-api-key` header for all protected requests:
+
+**GraphQL Request:**
+```bash
+curl -X POST http://localhost:3000/graphql \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -d '{"query": "{ teams { items { id name } } }"}'
+```
+
+**Sync Request:**
+```bash
+curl -X POST http://localhost:3000/sync/all \
+  -H "x-api-key: YOUR_API_KEY"
+```
+
+### Protected Endpoints
+
+| Endpoint | Auth Required | Header |
+|----------|---------------|--------|
+| `/graphql` | ✓ Yes | `x-api-key` |
+| `/graphiql` | ✓ Yes | `x-api-key` |
+| `/sync/*` | ✓ Yes | `x-api-key` |
+| `/health` | ✗ No | - |
+| `/health/ready` | ✗ No | - |
+| `/api/auth/*` | ✗ No | - |
+| `/protected` | ✓ Yes | Session cookie |
+
+### Error Responses
+
+**Missing API Key:**
+```json
+{
+  "errors": [{ "message": "API key is required" }]
+}
+```
+
+**Invalid API Key:**
+```json
+{
+  "errors": [{ "message": "Invalid API key" }]
+}
+```
+
 ## Docker Deployment
 
 ### Using Docker Compose (Recommended)
