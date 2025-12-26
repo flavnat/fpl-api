@@ -74,7 +74,7 @@ jobs:
 
       - name: Commit auto-fixes
         if: failure() && github.event_name == 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'chore: auto-fix linting issues'
           branch: ${{ github.head_ref }}
