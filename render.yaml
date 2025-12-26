@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: fpl-api
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL_PROD
+        sync: false
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: ENABLE_GRAPHIQL
+        value: "true"
+      - key: ENABLE_SWAGGER
+        value: "true"
+      - key: LOG_LEVEL
+        value: info

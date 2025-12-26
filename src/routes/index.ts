@@ -1,11 +1,10 @@
 import type { FastifyInstance } from 'fastify'
-import { authRoutes } from './auth.js'
 import { healthRoutes } from './health.js'
 import { syncRoutes } from './sync.js'
 
 export async function registerRoutes(fastify: FastifyInstance) {
-  // Register auth routes (Better-Auth)
-  await authRoutes(fastify)
+  // TODO: Add auth routes in next release
+  // await authRoutes(fastify)
 
   // Register health check routes
   await healthRoutes(fastify)

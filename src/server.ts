@@ -8,9 +8,7 @@ import { createContext } from './graphql/context.js'
 import { loaders } from './graphql/loaders.js'
 import { resolvers } from './graphql/resolvers.js'
 import { schema } from './graphql/schema.js'
-import { apiKeyAuth } from './middleware/auth.js'
 import db from './plugins/db.js'
-import rateLimitPlugin from './plugins/rate-limit.js'
 import securityPlugin from './plugins/security.js'
 import swaggerPlugin from './plugins/swagger.js'
 import { registerRoutes } from './routes/index.js'
@@ -40,17 +38,10 @@ export async function createServer() {
   })
 
   await fastify.register(securityPlugin)
-  await fastify.register(rateLimitPlugin)
+  // TODO: Add rate limiting in next release
+  // await fastify.register(rateLimitPlugin)
   await fastify.register(swaggerPlugin)
   await fastify.register(db)
-
-  // Protect GraphQL endpoints with API key authentication
-  fastify.addHook('preHandler', async (request, reply) => {
-    const isGraphQLRoute = request.url.startsWith('/graphql') || request.url.startsWith('/graphiql')
-    if (isGraphQLRoute) {
-      await apiKeyAuth(request, reply)
-    }
-  })
 
   // Register GraphQL
   await fastify.register(mercurius, {
