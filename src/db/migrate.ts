@@ -16,12 +16,14 @@ const pool = new Pool({
 const db = drizzle(pool)
 
 async function runMigrations() {
+  // eslint-disable-next-line no-console
   console.log('↺ Running migrations...')
 
   try {
     await migrate(db, {
       migrationsFolder: join(__dirname, '../../drizzle'),
     })
+    // eslint-disable-next-line no-console
     console.log('✓ Migrations completed!')
   }
   catch (error) {

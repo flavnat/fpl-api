@@ -7,10 +7,10 @@ export const fixturesResolver = {
     fixtures: async (_: any, { limit, offset, event }: any, { db }: any) => {
       const limitVal = limit || 50
       const offsetVal = offset || 0
-      
+
       let countQuery = db.select({ count: sql`count(*)` }).from(fixtures)
       let query = db.select().from(fixtures)
-      
+
       if (event) {
         countQuery = countQuery.where(eq(fixtures.event, event))
         query = query.where(eq(fixtures.event, event))

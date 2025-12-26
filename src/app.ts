@@ -18,11 +18,11 @@ async function start() {
     fastify.log.info(`Server listening on port ${env.PORT}`)
     fastify.log.info(`Environment: ${env.NODE_ENV}`)
     fastify.log.info(`GraphQL endpoint: http://localhost:${env.PORT}/graphql`)
-    
+
     if (env.ENABLE_GRAPHIQL) {
       fastify.log.info(`GraphiQL: http://localhost:${env.PORT}/graphiql`)
     }
-    
+
     if (env.ENABLE_SWAGGER) {
       fastify.log.info(`API Documentation: http://localhost:${env.PORT}/documentation`)
     }
