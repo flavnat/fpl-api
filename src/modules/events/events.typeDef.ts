@@ -30,8 +30,13 @@ export const eventsTypeDef = `
     most_vice_captained: Element
   }
 
+  type EventsResponse {
+    items: [Event]!
+    meta: PaginationMeta!
+  }
+
   extend type Query {
-    events: [Event]
+    events(limit: Int, offset: Int): EventsResponse
     event(id: Int!): Event
     currentEvent: Event
   }

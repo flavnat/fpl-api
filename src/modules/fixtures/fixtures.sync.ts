@@ -95,7 +95,7 @@ export async function syncFixtures() {
         })
     })
 
-    return { success: true }
+    return { count: data.length }
   }
   catch (error: any) {
     console.error('Fixture Sync Failed:', error)

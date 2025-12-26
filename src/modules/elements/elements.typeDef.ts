@@ -33,8 +33,13 @@ export const elementsTypeDef = `
     points_per_game: Float
   }
 
+  type ElementsResponse {
+    items: [Element]!
+    meta: PaginationMeta!
+  }
+
   extend type Query {
-    elements(limit: Int, offset: Int): [Element]
+    elements(limit: Int, offset: Int): ElementsResponse
     element(id: Int!): Element
   }
 `

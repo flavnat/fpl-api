@@ -13,8 +13,13 @@ export const elementTypesTypeDef = `
     element_count: Int
   }
 
+  type ElementTypesResponse {
+    items: [ElementType]!
+    meta: PaginationMeta!
+  }
+
   extend type Query {
-    element_types: [ElementType]
+    element_types(limit: Int, offset: Int): ElementTypesResponse
     element_type(id: Int!): ElementType
   }
 `

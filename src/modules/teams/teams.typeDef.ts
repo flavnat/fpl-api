@@ -22,8 +22,13 @@ export const teamsTypeDef = `
     strength_defence_away: Int
   }
 
+  type TeamsResponse {
+    items: [Team]!
+    meta: PaginationMeta!
+  }
+
   extend type Query {
-    teams: [Team]
+    teams(limit: Int, offset: Int): TeamsResponse
     team(id: Int!): Team
   }
 `

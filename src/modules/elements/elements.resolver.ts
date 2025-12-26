@@ -1,11 +1,35 @@
 import type { SQLWrapper } from 'drizzle-orm'
-import { eq } from 'drizzle-orm'
-import { elements, elementTypes, teams } from '../../db/schema.js'
+import { eq, sql } from 'drizzle-orm'
+import { elements, elementTypes, syncState, teams } from '../../db/schema.js'
 
 export const elementsResolver = {
   Query: {
-    elements: async (_: any, { limit }: any, { db }: any) => {
-      return await db.select().from(elements).limit(limit || 50)
+    elements: async (_: any, { limit, offset }: any, { db }: any) => {
+      const limitVal = limit || 50
+      const offsetVal = offset || 0
+
+      const [countResult] = await db.select({ count: sql`count(*)` }).from(elements)
+      const total = Number(countResult.count)
+
+      const [syncResult] = await db
+        .select({ syncedAt: syncState.syncedAt })
+        .from(syncState)
+        .where(eq(syncState.key, 'elements'))
+
+      const items = await db.select()
+        .from(elements)
+        .limit(limitVal)
+        .offset(offsetVal)
+
+      return {
+        items,
+        meta: {
+          total,
+          limit: limitVal,
+          offset: offsetVal,
+          lastSynced: syncResult?.syncedAt?.toISOString() || null,
+        },
+      }
     },
   },
   Element: {

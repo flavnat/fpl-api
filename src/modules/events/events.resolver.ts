@@ -1,10 +1,35 @@
-import { asc, eq } from 'drizzle-orm'
-import { events } from '../../db/schema.js'
+import { asc, eq, sql } from 'drizzle-orm'
+import { events, syncState } from '../../db/schema.js'
 
 export const eventsResolver = {
   Query: {
-    events: async (_: any, __: any, { db }: any) => {
-      return await db.select().from(events).orderBy(asc(events.id))
+    events: async (_: any, { limit, offset }: any, { db }: any) => {
+      const limitVal = limit || 40
+      const offsetVal = offset || 0
+
+      const [countResult] = await db.select({ count: sql`count(*)` }).from(events)
+      const total = Number(countResult.count)
+
+      const [syncResult] = await db
+        .select({ syncedAt: syncState.syncedAt })
+        .from(syncState)
+        .where(eq(syncState.key, 'events'))
+
+      const items = await db.select()
+        .from(events)
+        .limit(limitVal)
+        .offset(offsetVal)
+        .orderBy(asc(events.id))
+
+      return {
+        items,
+        meta: {
+          total,
+          limit: limitVal,
+          offset: offsetVal,
+          lastSynced: syncResult?.syncedAt?.toISOString() || null,
+        },
+      }
     },
     event: async (_: any, { id }: { id: number }, { db }: any) => {
       const [result] = await db.select().from(events).where(eq(events.id, id))

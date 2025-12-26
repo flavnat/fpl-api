@@ -30,8 +30,13 @@ export const fixturesTypeDef = `
     stats: [FixtureStat]
   }
 
+  type FixturesResponse {
+    items: [Fixture]!
+    meta: PaginationMeta!
+  }
+
   extend type Query {
     fixture(id: Int!): Fixture
-    fixtures(event: Int): [Fixture]
+    fixtures(limit: Int, offset: Int, event: Int): FixturesResponse
   }
 `
