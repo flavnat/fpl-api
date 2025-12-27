@@ -4,8 +4,11 @@ import {
   pgTable,
   text,
   timestamp,
+  unique,
 } from 'drizzle-orm/pg-core'
-import { elements, events, teams } from '../../db/schema.js'
+import { elements } from '../elements/elements.schema.js'
+import { events } from '../events/events.schema.js'
+import { teams } from '../teams/teams.schema.js'
 
 export interface StatDetail {
   value: number
@@ -43,7 +46,9 @@ export const fixtureStats = pgTable('fixture_stats', {
     .references(() => fixtures.id, { onDelete: 'cascade' })
     .notNull(),
   identifier: text('identifier').notNull(),
-})
+}, (t) => ({
+  uniqueIdentifier: unique().on(t.fixture_id, t.identifier),
+}))
 
 export const fixtureStatValues = pgTable('fixture_stat_values', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
