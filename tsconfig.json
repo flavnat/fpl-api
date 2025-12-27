@@ -8,12 +8,6 @@
     "rootDir": "./",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ],
     "resolveJsonModule": true,
     "strict": true,
     "exactOptionalPropertyTypes": false,
