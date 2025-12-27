@@ -11,10 +11,14 @@ export default function GraphQLOverviewPage() {
       </p>
 
       <h2>Endpoint</h2>
-      <CodeBlock 
-        code="POST https://fpl-api-6h0d.onrender.com/graphql" 
-        language="bash" 
-      />
+      <div className="group relative flex items-center gap-3 rounded-lg border border-border bg-[#0a0a0a] p-4">
+        <div className="flex select-none items-center justify-center rounded-md bg-blue-500/10 px-3 py-1 text-sm font-bold text-blue-500">
+          POST
+        </div>
+        <div className="flex-1 overflow-x-auto font-mono text-sm text-foreground">
+          https://fpl-api-6h0d.onrender.com/graphql
+        </div>
+      </div>
 
       <h2>Interactive Playground</h2>
       <p>

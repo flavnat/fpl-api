@@ -1,4 +1,4 @@
-import { Code, ExternalLink, Zap, Database, Shield, BookOpen } from "lucide-react"
+import { Code, ExternalLink, Zap, Database, Shield } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/components/code-block"
@@ -111,7 +111,7 @@ export default function DocsPage() {
   )
 }
 
-function FeatureCard({ icon: Icon, title, description }: { icon: any, title: string, description: string }) {
+function FeatureCard({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) {
   return (
     <div className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/20 hover:bg-muted/50">
       <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">

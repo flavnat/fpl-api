@@ -13,6 +13,8 @@ import {
   Trophy,
   Server,
   Heart,
+  Key,
+  RefreshCw,
 } from "lucide-react"
 
 import {
@@ -39,6 +41,13 @@ const navigation = [
     ],
   },
   {
+    title: "Authentication",
+    items: [
+      { title: "Register", href: "/docs/auth/register", icon: Users },
+      { title: "API Keys", href: "/docs/auth/api-keys", icon: Key },
+    ],
+  },
+  {
     title: "GraphQL API",
     items: [
       { title: "Overview", href: "/docs/graphql", icon: Code },
@@ -54,6 +63,7 @@ const navigation = [
     items: [
       { title: "Endpoints", href: "/docs/endpoints", icon: Server },
       { title: "Response Format", href: "/docs/response-format", icon: FileJson },
+      { title: "Sync Data", href: "/docs/sync", icon: RefreshCw },
       { title: "Health Check", href: "/docs/health", icon: Heart },
     ],
   },
