@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "build": "tsc -p tsconfig.json && tsc-alias",
+    "build": "./node_modules/.bin/tsc -p tsconfig.json && ./node_modules/.bin/tsc-alias",
     "dev": "tsx watch src/app.ts",
     "start": "node dist/src/app.js",
     "db:show": "tsx node_modules/drizzle-kit/bin.cjs studio --config ./drizzle.config.ts",
@@ -40,14 +40,14 @@
     "zod": "^4.2.1",
     "@types/node": "^22.10.2",
     "@types/pg": "^8.11.10",
-    "@types/pino-pretty": "^5.0.0"
+    "@types/pino-pretty": "^5.0.0",
+    "typescript": "^5.7.3",
+    "tsc-alias": "^1.8.16"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.7.3",
-    "tsc-alias": "^1.8.16"
+    "tsx": "^4.21.0"
   }
 }

@@ -4,10 +4,9 @@
     "moduleDetection": "force",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    // File Layout
     "rootDir": "./",
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "strict": true,
     "exactOptionalPropertyTypes": false,
@@ -28,6 +27,7 @@
     "drizzle.config.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }
