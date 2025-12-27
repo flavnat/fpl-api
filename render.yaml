@@ -1,11 +1,9 @@
 services:
   - type: web
     name: fpl-api
-    runtime: node
+    runtime: docker
     region: frankfurt
     plan: free
-    buildCommand: yarn install && yarn build
-    startCommand: yarn start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
