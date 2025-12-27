@@ -26,6 +26,10 @@ const swaggerPlugin: FastifyPluginAsync = async (fastify) => {
       },
       servers: [
         {
+          url: 'https://fpl-api-6h0d.onrender.com',
+          description: 'Production server',
+        },
+        {
           url: 'http://localhost:3000',
           description: 'Development server',
         },
