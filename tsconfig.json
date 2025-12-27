@@ -6,8 +6,8 @@
     "experimentalDecorators": true,
     // File Layout
     "rootDir": "./",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "strict": true,
     "exactOptionalPropertyTypes": false,
