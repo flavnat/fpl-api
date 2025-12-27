@@ -44,38 +44,39 @@ export async function syncEvents() {
       most_vice_captained: e.most_vice_captained,
     }))
 
-     // Pre-fetch existing events
-     const existingEvents = await db.select().from(events)
-     const existingMap = new Map(existingEvents.map(e => [e.id, e]))
- 
-     // Filter out unchanged events
-     const eventsToInsert = eventsToSync.filter((e: any) => {
-       const existing = existingMap.get(e.id)
-       if (!existing)
-         return true
- 
-       // Compare columns
-       const columns = getTableColumns(events)
-       return Object.entries(columns).some(([propName, _column]) => {
-         const newVal = (e as any)[propName]
-         const oldVal = (existing as any)[propName]
-         
-         // Simple equality check for primitives
-         if (newVal === oldVal) return false
-         
-         // Fix date comparison
-         if (newVal instanceof Date && oldVal instanceof Date) {
-            return newVal.getTime() !== oldVal.getTime()
-         }
+    // Pre-fetch existing events
+    const existingEvents = await db.select().from(events)
+    const existingMap = new Map(existingEvents.map(e => [e.id, e]))
 
-         // Deep compare for objects/arrays (simulated with JSON stringify for now as it's efficient enough for this data size)
-         if (typeof newVal === 'object' && newVal !== null && typeof oldVal === 'object' && oldVal !== null) {
-            return JSON.stringify(newVal) !== JSON.stringify(oldVal)
-         }
+    // Filter out unchanged events
+    const eventsToInsert = eventsToSync.filter((e: any) => {
+      const existing = existingMap.get(e.id)
+      if (!existing)
+        return true
 
-         return true
-       })
-     })
+      // Compare columns
+      const columns = getTableColumns(events)
+      return Object.entries(columns).some(([propName, _column]) => {
+        const newVal = (e as any)[propName]
+        const oldVal = (existing as any)[propName]
+
+        // Simple equality check for primitives
+        if (newVal === oldVal)
+          return false
+
+        // Fix date comparison
+        if (newVal instanceof Date && oldVal instanceof Date) {
+          return newVal.getTime() !== oldVal.getTime()
+        }
+
+        // Deep compare for objects/arrays (simulated with JSON stringify for now as it's efficient enough for this data size)
+        if (typeof newVal === 'object' && newVal !== null && typeof oldVal === 'object' && oldVal !== null) {
+          return JSON.stringify(newVal) !== JSON.stringify(oldVal)
+        }
+
+        return true
+      })
+    })
 
     const updateSet = Object.fromEntries(
       Object.entries(getTableColumns(events)).map(([propName, column]) => [
@@ -100,8 +101,9 @@ export async function syncEvents() {
             set: { syncedAt: sql`NOW()` },
           })
       })
-    } else {
-        await db.insert(syncState)
+    }
+    else {
+      await db.insert(syncState)
         .values({ key: 'events', syncedAt: new Date() })
         .onConflictDoUpdate({
           target: syncState.key,

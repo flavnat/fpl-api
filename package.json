@@ -26,6 +26,9 @@
     "@fastify/swagger-ui": "^5.2.3",
     "@pothos/core": "^4.10.0",
     "@pothos/plugin-drizzle": "^0.16.1",
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "@types/pino-pretty": "^5.0.0",
     "better-auth": "^1.4.9",
     "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.8",
@@ -36,13 +39,10 @@
     "graphql": "^16.12.0",
     "mercurius": "^16.6.0",
     "pg": "^8.16.3",
-    "undici": "^7.16.0",
-    "zod": "^4.2.1",
-    "@types/node": "^22.10.2",
-    "@types/pg": "^8.11.10",
-    "@types/pino-pretty": "^5.0.0",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.7.3",
-    "tsc-alias": "^1.8.16"
+    "undici": "^7.16.0",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",

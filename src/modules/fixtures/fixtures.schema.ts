@@ -46,7 +46,7 @@ export const fixtureStats = pgTable('fixture_stats', {
     .references(() => fixtures.id, { onDelete: 'cascade' })
     .notNull(),
   identifier: text('identifier').notNull(),
-}, (t) => ({
+}, t => ({
   uniqueIdentifier: unique().on(t.fixture_id, t.identifier),
 }))
 

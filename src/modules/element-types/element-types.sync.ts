@@ -43,30 +43,30 @@ export async function syncElementTypes() {
       element_count: t.element_count,
     }))
 
-     // Pre-fetch existing element types
-     const existingTypes = await db.select().from(elementTypes)
-     const existingMap = new Map(existingTypes.map(t => [t.id, t]))
- 
-     // Filter out unchanged types
-     const typesToInsert = typesToSync.filter((t: any) => {
-       const existing = existingMap.get(t.id)
-       if (!existing)
-         return true
- 
-       // Check if any upsert column has changed
-       return UPSERT_COLUMNS.some((col) => {
-           // Handle json fields comparison if any (sub_positions_locked is array)
-           const newVal = (t as any)[col]
-           const oldVal = (existing as any)[col]
-           
-           if (Array.isArray(newVal) && Array.isArray(oldVal)) {
-               // Assuming simple string arrays for sub_positions_locked
-               return JSON.stringify(newVal) !== JSON.stringify(oldVal)
-           }
-           
-           return newVal !== oldVal
-       })
-     })
+    // Pre-fetch existing element types
+    const existingTypes = await db.select().from(elementTypes)
+    const existingMap = new Map(existingTypes.map(t => [t.id, t]))
+
+    // Filter out unchanged types
+    const typesToInsert = typesToSync.filter((t: any) => {
+      const existing = existingMap.get(t.id)
+      if (!existing)
+        return true
+
+      // Check if any upsert column has changed
+      return UPSERT_COLUMNS.some((col) => {
+        // Handle json fields comparison if any (sub_positions_locked is array)
+        const newVal = (t as any)[col]
+        const oldVal = (existing as any)[col]
+
+        if (Array.isArray(newVal) && Array.isArray(oldVal)) {
+          // Assuming simple string arrays for sub_positions_locked
+          return JSON.stringify(newVal) !== JSON.stringify(oldVal)
+        }
+
+        return newVal !== oldVal
+      })
+    })
 
     const upsertSet = Object.fromEntries(
       UPSERT_COLUMNS.map(col => [
@@ -96,8 +96,9 @@ export async function syncElementTypes() {
             },
           })
       })
-    } else {
-        await db.insert(syncState)
+    }
+    else {
+      await db.insert(syncState)
         .values({
           key: 'element_types',
           syncedAt: new Date(),

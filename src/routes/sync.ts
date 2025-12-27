@@ -1,5 +1,4 @@
 import type { FastifyInstance } from 'fastify'
-import { apiKeyAuth } from '../middleware/auth.js'
 import { syncElementTypes } from '../modules/element-types/element-types.sync.js'
 import { syncElements } from '../modules/elements/elements.sync.js'
 import { syncEvents } from '../modules/events/events.sync.js'
@@ -19,7 +18,7 @@ export async function syncRoutes(fastify: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const [teams, elementTypes, elements , events, fixtures] = await Promise.all([
+        const [teams, elementTypes, elements, events, fixtures] = await Promise.all([
           syncTeams(),
           syncElementTypes(),
           syncElements(),
