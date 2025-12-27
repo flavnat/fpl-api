@@ -12,21 +12,19 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/all',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync all FPL data',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
       try {
-        const [elements, teams, fixtures, events, elementTypes] = await Promise.all([
-          syncElements(),
+        const [teams, elementTypes, elements , events, fixtures] = await Promise.all([
           syncTeams(),
-          syncFixtures(),
-          syncEvents(),
           syncElementTypes(),
+          syncElements(),
+          syncEvents(),
+          syncFixtures(),
         ])
 
         return reply.send(
@@ -64,11 +62,9 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/elements',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync FPL elements (players)',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
@@ -93,11 +89,9 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/teams',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync FPL teams',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
@@ -122,11 +116,9 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/fixtures',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync FPL fixtures',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
@@ -151,11 +143,9 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/events',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync FPL events (gameweeks)',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
@@ -180,11 +170,9 @@ export async function syncRoutes(fastify: FastifyInstance) {
   fastify.post(
     '/sync/element-types',
     {
-      preHandler: apiKeyAuth,
       schema: {
         description: 'Sync FPL element types (positions)',
         tags: ['sync'],
-        security: [{ apiKey: [] }],
       },
     },
     async (request, reply) => {
