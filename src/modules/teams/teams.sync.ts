@@ -59,6 +59,22 @@ export async function syncTeams() {
       pulse_id: t.pulse_id,
     }))
 
+     // Pre-fetch existing teams
+     const existingTeams = await db.select().from(teams)
+     const existingMap = new Map(existingTeams.map(t => [t.id, t]))
+ 
+     // Filter out unchanged teams
+     const teamsToInsert = teamsToSync.filter((t: any) => {
+       const existing = existingMap.get(t.id)
+       if (!existing)
+         return true
+ 
+       // Check if any upsert column has changed
+       return UPSERT_COLUMNS.some((col) => {
+         return (existing as any)[col] !== (t as any)[col]
+       })
+     })
+
     const upsertSet = Object.fromEntries(
       UPSERT_COLUMNS.map(col => [
         col,
@@ -66,15 +82,29 @@ export async function syncTeams() {
       ]),
     ) as Record<UpsertColumn, any>
 
-    await db.transaction(async (tx) => {
-      await tx.insert(teams)
-        .values(teamsToSync)
-        .onConflictDoUpdate({
-          target: teams.id,
-          set: upsertSet,
-        })
+    if (teamsToInsert.length > 0) {
+      await db.transaction(async (tx) => {
+        await tx.insert(teams)
+          .values(teamsToInsert)
+          .onConflictDoUpdate({
+            target: teams.id,
+            set: upsertSet,
+          })
 
-      await tx.insert(syncState)
+        await tx.insert(syncState)
+          .values({
+            key: 'teams',
+            syncedAt: new Date(),
+          })
+          .onConflictDoUpdate({
+            target: syncState.key,
+            set: {
+              syncedAt: sql`NOW()`,
+            },
+          })
+      })
+    } else {
+        await db.insert(syncState)
         .values({
           key: 'teams',
           syncedAt: new Date(),
@@ -85,9 +115,9 @@ export async function syncTeams() {
             syncedAt: sql`NOW()`,
           },
         })
-    })
+    }
 
-    return { count: teamsToSync.length }
+    return { count: teamsToInsert.length, total: teamsToSync.length }
   }
   catch (error: any) {
     throw new Error(`syncTeams failed: ${error.message}`)

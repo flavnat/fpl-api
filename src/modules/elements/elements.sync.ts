@@ -172,27 +172,58 @@ export async function syncElements() {
       expected_goals_conceded: Number.parseFloat(e.expected_goals_conceded) || 0,
     }))
 
+    // Pre-fetch existing elements
+    const existingElements = await db.select().from(elements)
+    const existingMap = new Map(existingElements.map(e => [e.id, e]))
+
+    // Filter out unchanged elements
+    const elementsToInsert = elementsToSync.filter((e: any) => {
+      const existing = existingMap.get(e.id)
+      if (!existing)
+        return true
+
+      // Check if any upsert column has changed
+      return UPSERT_COLUMNS.some((col) => {
+        // Handle float comparisons with small epsilon if needed, but strict equality is usually fine for these syncs
+        // assuming typical API behavior.
+        // For convenience we cast to any to avoid strict type issues during this generic check
+        return (existing as any)[col] !== (e as any)[col]
+      })
+    })
+
     const upsertSet = Object.fromEntries(
       UPSERT_COLUMNS.map(col => [col, sql.raw(`excluded.${col}`)]),
     ) as Record<UpsertColumn, any>
 
-    await db.transaction(async (tx) => {
-      await tx.insert(elements)
-        .values(elementsToSync)
-        .onConflictDoUpdate({
-          target: elements.id,
-          set: upsertSet,
-        })
+    if (elementsToInsert.length > 0) {
+      await db.transaction(async (tx) => {
+        await tx.insert(elements)
+          .values(elementsToInsert)
+          .onConflictDoUpdate({
+            target: elements.id,
+            set: upsertSet,
+          })
 
-      await tx.insert(syncState)
+        await tx.insert(syncState)
+          .values({ key: 'elements', syncedAt: new Date() })
+          .onConflictDoUpdate({
+            target: syncState.key,
+            set: { syncedAt: sql`NOW()` },
+          })
+      })
+    }
+    else {
+      // Just update sync state timestamp if nothing changed? Or maybe skipping is better.
+      // Let's update sync state to show we checked.
+      await db.insert(syncState)
         .values({ key: 'elements', syncedAt: new Date() })
         .onConflictDoUpdate({
           target: syncState.key,
           set: { syncedAt: sql`NOW()` },
         })
-    })
+    }
 
-    return { count: elementsToSync.length }
+    return { count: elementsToInsert.length, total: elementsToSync.length }
   }
   catch (error: any) {
     console.error(error)

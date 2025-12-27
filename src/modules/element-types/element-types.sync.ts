@@ -43,6 +43,31 @@ export async function syncElementTypes() {
       element_count: t.element_count,
     }))
 
+     // Pre-fetch existing element types
+     const existingTypes = await db.select().from(elementTypes)
+     const existingMap = new Map(existingTypes.map(t => [t.id, t]))
+ 
+     // Filter out unchanged types
+     const typesToInsert = typesToSync.filter((t: any) => {
+       const existing = existingMap.get(t.id)
+       if (!existing)
+         return true
+ 
+       // Check if any upsert column has changed
+       return UPSERT_COLUMNS.some((col) => {
+           // Handle json fields comparison if any (sub_positions_locked is array)
+           const newVal = (t as any)[col]
+           const oldVal = (existing as any)[col]
+           
+           if (Array.isArray(newVal) && Array.isArray(oldVal)) {
+               // Assuming simple string arrays for sub_positions_locked
+               return JSON.stringify(newVal) !== JSON.stringify(oldVal)
+           }
+           
+           return newVal !== oldVal
+       })
+     })
+
     const upsertSet = Object.fromEntries(
       UPSERT_COLUMNS.map(col => [
         col,
@@ -50,15 +75,29 @@ export async function syncElementTypes() {
       ]),
     ) as Record<UpsertColumn, any>
 
-    await db.transaction(async (tx) => {
-      await tx.insert(elementTypes)
-        .values(typesToSync)
-        .onConflictDoUpdate({
-          target: elementTypes.id,
-          set: upsertSet,
-        })
+    if (typesToInsert.length > 0) {
+      await db.transaction(async (tx) => {
+        await tx.insert(elementTypes)
+          .values(typesToInsert)
+          .onConflictDoUpdate({
+            target: elementTypes.id,
+            set: upsertSet,
+          })
 
-      await tx.insert(syncState)
+        await tx.insert(syncState)
+          .values({
+            key: 'element_types',
+            syncedAt: new Date(),
+          })
+          .onConflictDoUpdate({
+            target: syncState.key,
+            set: {
+              syncedAt: sql`NOW()`,
+            },
+          })
+      })
+    } else {
+        await db.insert(syncState)
         .values({
           key: 'element_types',
           syncedAt: new Date(),
@@ -69,9 +108,9 @@ export async function syncElementTypes() {
             syncedAt: sql`NOW()`,
           },
         })
-    })
+    }
 
-    return { count: typesToSync.length }
+    return { count: typesToInsert.length, total: typesToSync.length }
   }
   catch (error: any) {
     throw new Error(`syncElementTypes failed: ${error.message}`)

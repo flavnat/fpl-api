@@ -12,8 +12,34 @@ export async function syncFixtures() {
     })
     const data: any = await body.json()
 
+    // Pre-fetch existing fixtures to minimize DB writes
+    const existingFixtures = await db.select().from(fixtures)
+    const existingMap = new Map(existingFixtures.map(f => [f.id, f]))
+    let processedCount = 0
+
     await db.transaction(async (tx) => {
       for (const f of data) {
+        const existing = existingMap.get(f.id)
+
+        // Determine if we need to sync this fixture
+        // Sync if:
+        // 1. It's new
+        // 2. It's live (started but not finished)
+        // 3. Critical data changed (finished status, scores, minutes)
+        const isLive = f.started && !f.finished
+        const hasChanged = !existing
+          || existing.finished !== f.finished
+          || existing.started !== f.started
+          || existing.team_h_score !== f.team_h_score
+          || existing.team_a_score !== f.team_a_score
+          || existing.minutes !== f.minutes
+
+        if (!isLive && !hasChanged) {
+          continue
+        }
+
+        processedCount++
+
         await tx.insert(fixtures)
           .values({
             id: f.id,
@@ -75,6 +101,8 @@ export async function syncFixtures() {
               ]
 
               if (statValues.length > 0) {
+                // Optimize: only delete if we are inserting new values
+                // But for now, since we only processed changed fixtures, strict delete-insert is fine
                 await tx.delete(fixtureStatValues).where(sql`stat_id = ${insertedStat.id}`)
                 await tx.insert(fixtureStatValues).values(statValues)
               }
@@ -95,7 +123,7 @@ export async function syncFixtures() {
         })
     })
 
-    return { success: true, count: data.length }
+    return { success: true, count: processedCount, total: data.length }
   }
   catch (error: any) {
     console.error('Fixture Sync Failed:', error)
