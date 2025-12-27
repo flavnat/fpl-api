@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { desc } from 'drizzle-orm'
 import { syncState } from '../db/schema.js'
-import { auth } from '../lib/auth'
+import { auth } from '../lib/auth.js'
 import { db } from '../plugins/db.js'
 import { successResponse } from '../utils/api-response.js'
 
