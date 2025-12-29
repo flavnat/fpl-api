@@ -26,7 +26,7 @@
     "@fastify/swagger-ui": "^5.2.3",
     "@pothos/core": "^4.10.0",
     "@pothos/plugin-drizzle": "^0.16.1",
-    "@types/node": "^22.10.2",
+    "@types/node": "^25.0.3",
     "@types/pg": "^8.11.10",
     "@types/pino-pretty": "^5.0.0",
     "better-auth": "^1.4.9",
