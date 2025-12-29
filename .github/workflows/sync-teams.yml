@@ -1,0 +1,27 @@
+name: Sync Teams
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  sync-teams:
+    name: Sync Teams
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Sync Teams Endpoint
+        run: |
+          response=$(curl -s -w "%{http_code}" -X POST ${{ secrets.API_BASE_URL }}/sync/teams \
+            -H "x-api-key: ${{ secrets.API_KEY }}" \
+            -H "Content-Type: application/json")
+          
+          http_code=${response: -3}
+          content=${response:0:${#response}-3}
+          
+          echo "Response: $content"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Sync failed with status code $http_code"
+            exit 1
+          fi
