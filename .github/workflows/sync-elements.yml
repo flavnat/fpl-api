@@ -14,7 +14,8 @@ jobs:
         run: |
           response=$(curl -s -w "%{http_code}" -X POST ${{ secrets.API_BASE_URL }}/sync/elements \
             -H "x-api-key: ${{ secrets.API_KEY }}" \
-            -H "Content-Type: application/json")
+            -H "Content-Type: application/json" \
+            -d '{}')
           
           http_code=${response: -3}
           content=${response:0:${#response}-3}
