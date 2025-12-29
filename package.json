@@ -1,7 +1,7 @@
 {
   "name": "fpl-api",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "flavnat <natnael01ayele@gmail.com>",
   "license": "MIT",
   "repository": "git@github.com:flavnat/fpl-api.git",
@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "build": "./node_modules/.bin/tsc -p tsconfig.json && ./node_modules/.bin/tsc-alias",
+    "build": "tsc -p tsconfig.json && tsc-alias",
     "dev": "tsx watch src/app.ts",
     "start": "node dist/src/app.js",
     "db:show": "tsx node_modules/drizzle-kit/bin.cjs studio --config ./drizzle.config.ts",
