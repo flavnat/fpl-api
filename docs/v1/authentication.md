@@ -10,6 +10,6 @@ To access these, you must provide the `x-api-key` header:
 
 ```http
 POST /sync/fixtures HTTP/1.1
-Host: api.yourdomain.com
+Host: https://fpl-api-6h0d.onrender.com
 x-api-key: YOUR_ADMIN_KEY
 ```
