@@ -9,6 +9,7 @@ import { loaders } from './graphql/loaders.js'
 import { resolvers } from './graphql/resolvers.js'
 import { schema } from './graphql/schema.js'
 import db from './plugins/db.js'
+import rateLimitPlugin from './plugins/rate-limit.js'
 import securityPlugin from './plugins/security.js'
 import swaggerPlugin from './plugins/swagger.js'
 import { registerRoutes } from './routes/index.js'
@@ -38,8 +39,7 @@ export async function createServer() {
   })
 
   await fastify.register(securityPlugin)
-  // TODO: Add rate limiting in next release
-  // await fastify.register(rateLimitPlugin)
+  await fastify.register(rateLimitPlugin)
   await fastify.register(swaggerPlugin)
   await fastify.register(db)
 

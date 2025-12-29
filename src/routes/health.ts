@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { desc } from 'drizzle-orm'
 import { syncState } from '../db/schema.js'
-import { auth } from '../lib/auth.js'
+
 import { db } from '../plugins/db.js'
 import { successResponse } from '../utils/api-response.js'
 
@@ -94,19 +94,5 @@ export async function healthRoutes(fastify: FastifyInstance) {
     },
   )
 
-  // Protected route example
-  fastify.get('/protected', async (request, reply) => {
-    const session = await auth.api.getSession({
-      headers: new Headers(request.headers as any),
-    })
 
-    if (!session) {
-      return reply.status(401).send({ error: 'Unauthorized' })
-    }
-
-    return reply.send({
-      status: 'authenticated',
-      user: session.user,
-    })
-  })
 }
