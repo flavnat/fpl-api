@@ -20,6 +20,7 @@ export const eventWinnersTypeDef = `
 
   extend type Query {
     eventWinners(event_id: Int!, limit: Int, offset: Int): EventWinnersResponse!
+    allEventWinners(limit: Int, offset: Int): EventWinnersResponse!
     eventWinner(id: Int!): EventWinner
   }
 `
