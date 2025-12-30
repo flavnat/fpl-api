@@ -2,6 +2,7 @@ import { elementTypesResolver } from '../modules/element-types/element-types.res
 import { elementsResolver } from '../modules/elements/elements.resolver.js'
 import { eventsResolver } from '../modules/events/events.resolver.js'
 import { fixturesResolver } from '../modules/fixtures/fixtures.resolver.js'
+import { phasesResolver } from '../modules/phases/phases.resolver.js'
 import { teamsResolver } from '../modules/teams/teams.resolver.js'
 
 export const resolvers = {
@@ -11,6 +12,7 @@ export const resolvers = {
     ...teamsResolver.Query,
     ...eventsResolver.Query,
     ...elementTypesResolver.Query,
+    ...phasesResolver.Query,
   },
   Element: elementsResolver.Element,
 }

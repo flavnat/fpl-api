@@ -5,6 +5,7 @@ import { syncElementTypes } from '../modules/element-types/element-types.sync.js
 import { syncElements } from '../modules/elements/elements.sync.js'
 import { syncEvents } from '../modules/events/events.sync.js'
 import { syncFixtures } from '../modules/fixtures/fixtures.sync.js'
+import { syncPhases } from '../modules/phases/phases.sync.js'
 import { syncTeams } from '../modules/teams/teams.sync.js'
 import { errorResponse, successResponse } from '../utils/api-response.js'
 
@@ -23,12 +24,13 @@ export async function syncRoutes(fastify: FastifyInstance) {
 
     async (request, reply) => {
       try {
-        const [teams, elementTypes, elements, events, fixtures] = await Promise.all([
+        const [teams, elementTypes, elements, events, fixtures, phases] = await Promise.all([
           syncTeams(),
           syncElementTypes(),
           syncElements(),
           syncEvents(),
           syncFixtures(),
+          syncPhases(),
         ])
 
         return reply.send(
@@ -39,6 +41,7 @@ export async function syncRoutes(fastify: FastifyInstance) {
               fixtures: fixtures.count,
               events: events.count,
               elementTypes: elementTypes.count,
+              phases: phases.count,
             },
             request.id,
             {
@@ -48,6 +51,7 @@ export async function syncRoutes(fastify: FastifyInstance) {
                 fixtures: new Date().toISOString(),
                 events: new Date().toISOString(),
                 elementTypes: new Date().toISOString(),
+                phases: new Date().toISOString(),
               },
             },
           ),
@@ -205,6 +209,36 @@ export async function syncRoutes(fastify: FastifyInstance) {
       }
       catch (error: any) {
         request.log.error(error, 'Sync element types failed')
+        return reply.code(500).send(
+          errorResponse('SYNC_ERROR', error.message, undefined, request.id),
+        )
+      }
+    },
+  )
+
+  // Sync phases
+  fastify.post(
+    '/sync/phases',
+    {
+      schema: {
+        description: 'Sync FPL phases',
+        tags: ['sync'],
+        security: [{ apiKey: [] }],
+      },
+      preHandler: [apiKeyAuth],
+    },
+
+    async (request, reply) => {
+      try {
+        const result = await syncPhases()
+        return reply.send(
+          successResponse(result, request.id, {
+            lastSync: { phases: new Date().toISOString() },
+          }),
+        )
+      }
+      catch (error: any) {
+        request.log.error(error, 'Sync phases failed')
         return reply.code(500).send(
           errorResponse('SYNC_ERROR', error.message, undefined, request.id),
         )

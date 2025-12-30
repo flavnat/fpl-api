@@ -2,6 +2,7 @@ import { elementTypesTypeDef } from '../modules/element-types/element-types.type
 import { elementsTypeDef } from '../modules/elements/elements.typeDef.js'
 import { eventsTypeDef } from '../modules/events/events.typeDef.js'
 import { fixturesTypeDef } from '../modules/fixtures/fixtures.typeDef.js'
+import { phasesTypeDef } from '../modules/phases/phases.typeDef.js'
 import { teamsTypeDef } from '../modules/teams/teams.typeDef.js'
 
 export const schema = [
@@ -17,4 +18,5 @@ export const schema = [
   teamsTypeDef,
   eventsTypeDef,
   elementTypesTypeDef,
+  phasesTypeDef,
 ]
