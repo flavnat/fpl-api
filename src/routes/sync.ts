@@ -3,6 +3,7 @@ import { apiKeyAuth } from '../middleware/auth.js'
 
 import { syncElementTypes } from '../modules/element-types/element-types.sync.js'
 import { syncElements } from '../modules/elements/elements.sync.js'
+import { syncEventWinners } from '../modules/event-winners/event-winners.sync.js'
 import { syncEvents } from '../modules/events/events.sync.js'
 import { syncFixtures } from '../modules/fixtures/fixtures.sync.js'
 import { syncPhases } from '../modules/phases/phases.sync.js'
@@ -245,4 +246,35 @@ export async function syncRoutes(fastify: FastifyInstance) {
       }
     },
   )
+
+  // Sync event winners
+  fastify.post(
+    '/sync/event-winners',
+    {
+      schema: {
+        description: 'Sync event winners for all events (1-38) from the global FPL league',
+        tags: ['sync'],
+        security: [{ apiKey: [] }],
+      },
+      preHandler: [apiKeyAuth],
+    },
+
+    async (request, reply) => {
+      try {
+        const result = await syncEventWinners()
+        return reply.send(
+          successResponse(result, request.id, {
+            lastSync: { eventWinners: new Date().toISOString() },
+          }),
+        )
+      }
+      catch (error: any) {
+        request.log.error(error, 'Sync event winners failed')
+        return reply.code(500).send(
+          errorResponse('SYNC_ERROR', error.message, undefined, request.id),
+        )
+      }
+    },
+  )
 }
+

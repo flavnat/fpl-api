@@ -1,5 +1,6 @@
 import * as elementTypes from '../modules/element-types/element-types.schema.js'
 import * as elements from '../modules/elements/elements.schema.js'
+import * as eventWinners from '../modules/event-winners/event-winners.schema.js'
 import * as events from '../modules/events/events.schema.js'
 import * as fixtures from '../modules/fixtures/fixtures.schema.js'
 import * as phases from '../modules/phases/phases.schema.js'
@@ -8,6 +9,7 @@ import * as teams from '../modules/teams/teams.schema.js'
 
 export * from '../modules/element-types/element-types.schema.js'
 export * from '../modules/elements/elements.schema.js'
+export * from '../modules/event-winners/event-winners.schema.js'
 export * from '../modules/events/events.schema.js'
 export * from '../modules/fixtures/fixtures.schema.js'
 export * from '../modules/phases/phases.schema.js'
@@ -18,6 +20,7 @@ export const schema = {
   ...teams,
   ...elementTypes,
   ...elements,
+  ...eventWinners,
   ...events,
   ...fixtures,
   ...phases,

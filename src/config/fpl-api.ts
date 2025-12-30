@@ -67,6 +67,12 @@ export const FPL_API = {
   LEAGUE_CLASSIC: (leagueId: number) => `${FPL_BASE_URL}/leagues-classic/${leagueId}/standings/`,
 
   /**
+   * Event winners endpoint
+   * @param eventId - The gameweek ID
+   */
+  EVENT_WINNERS: (eventId: number) => `${FPL_BASE_URL}/winners/event/${eventId}/`,
+
+  /**
    * Dream team endpoint
    * @param eventId - The gameweek ID
    */
