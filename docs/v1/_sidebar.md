@@ -7,3 +7,5 @@
   * [Teams](v1/teams.md)
   * [Fixtures](v1/fixtures.md)
   * [Events (Gameweeks)](v1/events.md)
+  * [Dream Team](v1/dream-team.md)
+  * [Event Winners](v1/event-winners.md)

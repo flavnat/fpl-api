@@ -54,3 +54,17 @@ The `syncElements` process handles the heavy lifting of player data:
 The `syncTeams` process is generally static but monitors:
 *   **Form & Strength**: Updates team strength ratings (`strength_attack_home`, etc.) which FPL adjusts throughout the season.
 *   **Stats**: Wins, draws, losses, and generic table positions.
+
+### Dream Team
+The `syncDreamTeam` process fetches the best performing XI for each gameweek:
+*   **Trigger**: Iterates through all 38 gameweeks via `/dream-team/{event_id}/`
+*   **Data Points**: Top player ID, top player points, and the full 11-player team roster.
+*   **Optimization**: Uses upsert to update existing records without duplicates.
+*   **Error Handling**: Gracefully skips 404 responses for future gameweeks.
+
+### Event Winners
+The `syncEventWinners` process tracks top-performing managers:
+*   **Trigger**: Fetches from the global league standings for each gameweek.
+*   **Immutability Optimization**: Winners data is immutable once finalized—already synced gameweeks are cached and skipped.
+*   **Scope**: Captures rank, points, team name, and manager details for leaderboard entries.
+*   **Error Handling**: Skips 404 responses and continues to next event.
