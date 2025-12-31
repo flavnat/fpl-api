@@ -1,0 +1,28 @@
+name: Sync Event Winners
+
+on:
+  schedule:
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-event-winners:
+    name: Sync Event Winners
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Sync Event Winners Endpoint
+        run: |
+          response=$(curl -s -w "%{http_code}" -X POST ${{ secrets.API_BASE_URL }}/sync/event-winners \
+            -H "x-api-key: ${{ secrets.API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}')
+          
+          http_code=${response: -3}
+          content=${response:0:${#response}-3}
+          
+          echo "Response: $content"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Sync failed with status code $http_code"
+            exit 1
+          fi
