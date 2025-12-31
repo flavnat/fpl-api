@@ -1,6 +1,6 @@
 import { integer, jsonb, pgTable } from 'drizzle-orm/pg-core'
-import { elements } from '../elements/elements.schema'
-import { events } from '../events/events.schema'
+import { elements } from '../elements/elements.schema.js'
+import { events } from '../events/events.schema.js'
 
 export interface DreamTeamPlayer {
   element: number
