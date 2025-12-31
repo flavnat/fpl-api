@@ -45,4 +45,20 @@ export const fixturesResolver = {
       return result
     },
   },
+  Fixture: {
+    team_h: (parent: any, _args: any, { loader }: any) => {
+      return loader.Fixture.team_h.load(parent)
+    },
+    team_a: (parent: any, _args: any, { loader }: any) => {
+      return loader.Fixture.team_a.load(parent)
+    },
+    stats: (parent: any, _args: any, { loader }: any) => {
+      return loader.Fixture.stats.load(parent)
+    },
+  },
+  StatValue: {
+    element: (parent: any, _args: any, { loader }: any) => {
+      return loader.StatValue.element.load(parent)
+    },
+  },
 }

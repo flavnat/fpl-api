@@ -46,5 +46,20 @@ export const eventsResolver = {
       rules: JSON.stringify(parent.overrides?.rules),
       scoring: JSON.stringify(parent.overrides?.scoring),
     }),
+    most_selected: (parent: any, _args: any, { loader }: any) => {
+      return loader.Event.most_selected.load(parent)
+    },
+    most_transferred_in: (parent: any, _args: any, { loader }: any) => {
+      return loader.Event.most_transferred_in.load(parent)
+    },
+    top_element: (parent: any, _args: any, { loader }: any) => {
+      return loader.Event.top_element.load(parent)
+    },
+    most_captained: (parent: any, _args: any, { loader }: any) => {
+      return loader.Event.most_captained.load(parent)
+    },
+    most_vice_captained: (parent: any, _args: any, { loader }: any) => {
+      return loader.Event.most_vice_captained.load(parent)
+    },
   },
 }

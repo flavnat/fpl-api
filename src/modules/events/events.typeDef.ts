@@ -9,6 +9,12 @@ export const eventsTypeDef = `
     points: Int
   }
 
+  type EventOverrides {
+    rules: String
+    scoring: String
+    pick_multiplier: Int
+  }
+
   type Event {
     id: Int!
     name: String!
@@ -21,6 +27,7 @@ export const eventsTypeDef = `
     highest_score: Int
     chip_playes: [ChipPlay]
     top_element_info: TopElementInfo
+    overrides: EventOverrides
     
 
     most_selected: Element
