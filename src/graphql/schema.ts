@@ -1,3 +1,4 @@
+import { dreamTeamTypeDef } from '../modules/dream-team/dream-team.typeDef.js'
 import { elementTypesTypeDef } from '../modules/element-types/element-types.typeDef.js'
 import { elementsTypeDef } from '../modules/elements/elements.typeDef.js'
 import { eventWinnersTypeDef } from '../modules/event-winners/event-winners.typeDef.js'
@@ -21,4 +22,5 @@ export const schema = [
   eventWinnersTypeDef,
   elementTypesTypeDef,
   phasesTypeDef,
+  dreamTeamTypeDef,
 ]

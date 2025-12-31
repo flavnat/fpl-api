@@ -1,3 +1,4 @@
+import * as dreamTeam from '../modules/dream-team/dream-team.schema.js'
 import * as elementTypes from '../modules/element-types/element-types.schema.js'
 import * as elements from '../modules/elements/elements.schema.js'
 import * as eventWinners from '../modules/event-winners/event-winners.schema.js'
@@ -7,6 +8,7 @@ import * as phases from '../modules/phases/phases.schema.js'
 import * as syncState from '../modules/sync-state/sync-state.schema.js'
 import * as teams from '../modules/teams/teams.schema.js'
 
+export * from '../modules/dream-team/dream-team.schema.js'
 export * from '../modules/element-types/element-types.schema.js'
 export * from '../modules/elements/elements.schema.js'
 export * from '../modules/event-winners/event-winners.schema.js'
@@ -24,5 +26,6 @@ export const schema = {
   ...events,
   ...fixtures,
   ...phases,
+  ...dreamTeam,
   ...syncState,
 }

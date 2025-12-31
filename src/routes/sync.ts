@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { apiKeyAuth } from '../middleware/auth.js'
 
+import { syncDreamTeam } from '../modules/dream-team/dream-team.sync.js'
 import { syncElementTypes } from '../modules/element-types/element-types.sync.js'
 import { syncElements } from '../modules/elements/elements.sync.js'
 import { syncEventWinners } from '../modules/event-winners/event-winners.sync.js'
@@ -276,5 +277,32 @@ export async function syncRoutes(fastify: FastifyInstance) {
       }
     },
   )
-}
 
+  fastify.post(
+    '/sync/dream-team',
+    {
+      schema: {
+        description: 'Sync the best performing team (Dream Team) for all gameweeks',
+        tags: ['sync'],
+        security: [{ apiKey: [] }],
+      },
+      preHandler: [apiKeyAuth],
+    },
+    async (request, reply) => {
+      try {
+        const result = await syncDreamTeam()
+        return reply.send(
+          successResponse(result, request.id, {
+            lastSync: { dreamTeam: new Date().toISOString() },
+          }),
+        )
+      }
+      catch (error: any) {
+        request.log.error(error, 'Sync dream team failed')
+        return reply.code(500).send(
+          errorResponse('SYNC_ERROR', error.message, undefined, request.id),
+        )
+      }
+    },
+  )
+}
