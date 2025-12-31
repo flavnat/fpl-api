@@ -15,7 +15,8 @@
     "db:show": "tsx node_modules/drizzle-kit/bin.cjs studio --config ./drizzle.config.ts",
     "db:generate": "tsx node_modules/drizzle-kit/bin.cjs generate --config ./drizzle.config.ts",
     "db:push": "tsx node_modules/drizzle-kit/bin.cjs push --config ./drizzle.config.ts",
-    "db:migrate": "tsx src/db/migrate.ts"
+    "db:migrate": "tsx src/db/migrate.ts",
+    "docs": "npx docsify-cli serve docs"
   },
   "dependencies": {
     "@fastify/compress": "^8.3.1",
