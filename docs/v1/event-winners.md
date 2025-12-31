@@ -24,7 +24,7 @@ Event Winners represent the top-performing FPL managers for each gameweek, ranke
 
 ```graphql
 query {
-  event_winners(where: { event_id: { eq: 10 } }, orderBy: { rank: ASC }, limit: 10) {
+  event_winners(where: { event_id: { eq: 10 } }, orderBy: { field: rank, direction: ASC }, first: 10) {
     items {
       rank
       team_name
@@ -40,7 +40,7 @@ query {
 
 ```graphql
 query {
-  event_winners(orderBy: { points: DESC }, limit: 20) {
+  event_winners(orderBy: { field: points, direction: DESC }, first: 20) {
     items {
       event_id
       team_name

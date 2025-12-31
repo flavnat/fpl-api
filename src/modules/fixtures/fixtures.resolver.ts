@@ -1,33 +1,67 @@
 // src/modules/fixtures/fixtures.resolver.ts
-import { asc, eq, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { fixtures, syncState } from '../../db/schema.js'
+import { buildOrderBy, buildWhereConditions } from '../../utils/query-builder.js'
+
+const fixtureColumns = {
+  id: fixtures.id,
+  code: fixtures.code,
+  event: fixtures.event,
+  team_h: fixtures.team_h,
+  team_a: fixtures.team_a,
+  team_h_score: fixtures.team_h_score,
+  team_a_score: fixtures.team_a_score,
+  finished: fixtures.finished,
+  finished_provisional: fixtures.finished_provisional,
+  started: fixtures.started,
+  team_h_difficulty: fixtures.team_h_difficulty,
+  team_a_difficulty: fixtures.team_a_difficulty,
+  kickoff_time: fixtures.kickoff_time,
+}
 
 export const fixturesResolver = {
   Query: {
-    fixtures: async (_: any, { limit, offset, event }: any, { db }: any) => {
-      const limitVal = limit || 50
+    fixtures: async (_: any, { where, orderBy, first, limit, offset, event }: any, { db }: any) => {
+      const limitVal = first || limit || 50
       const offsetVal = offset || 0
 
-      let countQuery = db.select({ count: sql`count(*)` }).from(fixtures)
-      let query = db.select().from(fixtures)
-
+      // Build WHERE conditions from filter
+      let whereCondition = buildWhereConditions(where, fixtureColumns)
+      
+      // Support legacy 'event' parameter for backwards compatibility
       if (event) {
-        countQuery = countQuery.where(eq(fixtures.event, event))
-        query = query.where(eq(fixtures.event, event))
+        const eventCondition = eq(fixtures.event, event)
+        whereCondition = whereCondition ? and(whereCondition, eventCondition) : eventCondition
       }
 
+      // Base count query
+      let countQuery = db.select({ count: sql`count(*)` }).from(fixtures)
+      if (whereCondition) {
+        countQuery = countQuery.where(whereCondition)
+      }
       const [countResult] = await countQuery
       const total = Number(countResult.count)
 
+      // Get sync state
       const [syncResult] = await db
         .select({ syncedAt: syncState.syncedAt })
         .from(syncState)
         .where(eq(syncState.key, 'fixtures'))
 
-      const items = await query
-        .limit(limitVal)
-        .offset(offsetVal)
-        .orderBy(asc(fixtures.kickoff_time))
+      // Build main query
+      let query = db.select().from(fixtures)
+      
+      if (whereCondition) {
+        query = query.where(whereCondition)
+      }
+
+      // Apply ordering
+      const orderClause = buildOrderBy(orderBy, fixtureColumns, fixtures.kickoff_time, 'ASC')
+      if (orderClause) {
+        query = query.orderBy(orderClause)
+      }
+
+      const items = await query.limit(limitVal).offset(offsetVal)
 
       return {
         items,

@@ -54,6 +54,7 @@ query {
     items {
       team_h { name }
       team_a { name }
+    }
   }
 }
 ```

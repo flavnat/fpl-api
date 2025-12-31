@@ -19,6 +19,13 @@ export const eventWinnersTypeDef = `
   }
 
   extend type Query {
+    event_winners(
+      where: EventWinnerFilter
+      orderBy: EventWinnerOrderBy
+      first: Int
+      limit: Int
+      offset: Int
+    ): EventWinnersResponse!
     eventWinners(event_id: Int!, limit: Int, offset: Int): EventWinnersResponse!
     allEventWinners(limit: Int, offset: Int): EventWinnersResponse!
     eventWinner(id: Int!): EventWinner

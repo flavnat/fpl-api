@@ -31,6 +31,12 @@ export const elementsTypeDef = `
     ict_index: Float
     form: Float
     points_per_game: Float
+    selected_by_percent: Float
+    transfers_in_event: Int
+    transfers_out_event: Int
+    cost_change_event: Int
+    in_dreamteam: Boolean
+    chance_of_playing_next_round: Int
   }
 
   type ElementsResponse {
@@ -39,7 +45,13 @@ export const elementsTypeDef = `
   }
 
   extend type Query {
-    elements(limit: Int, offset: Int): ElementsResponse
+    elements(
+      where: ElementFilter
+      orderBy: ElementOrderBy
+      first: Int
+      limit: Int
+      offset: Int
+    ): ElementsResponse
     element(id: Int!): Element
   }
 `

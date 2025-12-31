@@ -43,7 +43,13 @@ export const eventsTypeDef = `
   }
 
   extend type Query {
-    events(limit: Int, offset: Int): EventsResponse
+    events(
+      where: EventFilter
+      orderBy: EventOrderBy
+      first: Int
+      limit: Int
+      offset: Int
+    ): EventsResponse
     event(id: Int!): Event
     currentEvent: Event
   }

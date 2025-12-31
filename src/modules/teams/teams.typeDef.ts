@@ -28,7 +28,13 @@ export const teamsTypeDef = `
   }
 
   extend type Query {
-    teams(limit: Int, offset: Int): TeamsResponse
+    teams(
+      where: TeamFilter
+      orderBy: TeamOrderBy
+      first: Int
+      limit: Int
+      offset: Int
+    ): TeamsResponse
     team(id: Int!): Team
   }
 `

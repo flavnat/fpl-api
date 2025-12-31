@@ -43,7 +43,6 @@ query {
   dream_teams {
     items {
       event_id
-      top_element_id
       top_element_points
     }
     meta {

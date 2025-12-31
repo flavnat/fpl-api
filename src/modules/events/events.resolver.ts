@@ -1,25 +1,56 @@
-import { asc, eq, sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { events, syncState } from '../../db/schema.js'
+import { buildOrderBy, buildWhereConditions } from '../../utils/query-builder.js'
+
+// Column mapping for events table
+const eventColumns = {
+  id: events.id,
+  name: events.name,
+  finished: events.finished,
+  is_current: events.is_current,
+  is_next: events.is_next,
+  is_previous: events.is_previous,
+  average_entry_score: events.average_entry_score,
+  highest_score: events.highest_score,
+  deadline_time: events.deadline_time,
+}
 
 export const eventsResolver = {
   Query: {
-    events: async (_: any, { limit, offset }: any, { db }: any) => {
-      const limitVal = limit || 40
+    events: async (_: any, { where, orderBy, first, limit, offset }: any, { db }: any) => {
+      const limitVal = first || limit || 40
       const offsetVal = offset || 0
 
-      const [countResult] = await db.select({ count: sql`count(*)` }).from(events)
+      // Build WHERE conditions from filter
+      const whereCondition = buildWhereConditions(where, eventColumns)
+
+      // Base count query
+      let countQuery = db.select({ count: sql`count(*)` }).from(events)
+      if (whereCondition) {
+        countQuery = countQuery.where(whereCondition)
+      }
+      const [countResult] = await countQuery
       const total = Number(countResult.count)
 
+      // Get sync state
       const [syncResult] = await db
         .select({ syncedAt: syncState.syncedAt })
         .from(syncState)
         .where(eq(syncState.key, 'events'))
 
-      const items = await db.select()
-        .from(events)
-        .limit(limitVal)
-        .offset(offsetVal)
-        .orderBy(asc(events.id))
+      let query = db.select().from(events)
+      
+      if (whereCondition) {
+        query = query.where(whereCondition)
+      }
+
+      // Apply ordering
+      const orderClause = buildOrderBy(orderBy, eventColumns, events.id, 'ASC')
+      if (orderClause) {
+        query = query.orderBy(orderClause)
+      }
+
+      const items = await query.limit(limitVal).offset(offsetVal)
 
       return {
         items,

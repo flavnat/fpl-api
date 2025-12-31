@@ -6,6 +6,7 @@ import { eventsTypeDef } from '../modules/events/events.typeDef.js'
 import { fixturesTypeDef } from '../modules/fixtures/fixtures.typeDef.js'
 import { phasesTypeDef } from '../modules/phases/phases.typeDef.js'
 import { teamsTypeDef } from '../modules/teams/teams.typeDef.js'
+import { filterTypeDefs } from './filter-types.js'
 
 export const schema = [
   `type PaginationMeta {
@@ -15,6 +16,7 @@ export const schema = [
     lastSynced: String
   }`,
   `type Query { _root: String }`,
+  filterTypeDefs,
   elementsTypeDef,
   fixturesTypeDef,
   teamsTypeDef,

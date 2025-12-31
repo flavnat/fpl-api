@@ -37,6 +37,13 @@ export const fixturesTypeDef = `
 
   extend type Query {
     fixture(id: Int!): Fixture
-    fixtures(limit: Int, offset: Int, event: Int): FixturesResponse
+    fixtures(
+      where: FixtureFilter
+      orderBy: FixtureOrderBy
+      first: Int
+      limit: Int
+      offset: Int
+      event: Int
+    ): FixturesResponse
   }
 `
