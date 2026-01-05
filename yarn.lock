@@ -784,12 +784,24 @@
     fastq "^1.17.1"
     glob "^11.0.0"
 
-"@fastify/swagger-ui@^5.2.3":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@fastify/swagger-ui/-/swagger-ui-5.2.3.tgz#3dc7f5ed3c226f55d894cdc2d45490efd22f3c4a"
-  integrity sha512-e7ivEJi9EpFcxTONqICx4llbpB2jmlI+LI1NQ/mR7QGQnyDOqZybPK572zJtcdHZW4YyYTBHcP3a03f1pOh0SA==
+"@fastify/static@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@fastify/static/-/static-9.0.0.tgz#d111b905ed54d647e2693cf317a61d60d143b843"
+  integrity sha512-r64H8Woe/vfilg5RTy7lwWlE8ZZcTrc3kebYFMEUBrMqlydhQyoiExQXdYAy2REVpST/G35+stAM8WYp1WGmMA==
   dependencies:
-    "@fastify/static" "^8.0.0"
+    "@fastify/accept-negotiator" "^2.0.0"
+    "@fastify/send" "^4.0.0"
+    content-disposition "^1.0.1"
+    fastify-plugin "^5.0.0"
+    fastq "^1.17.1"
+    glob "^13.0.0"
+
+"@fastify/swagger-ui@^5.2.4":
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@fastify/swagger-ui/-/swagger-ui-5.2.4.tgz#190d959d86369e4b88787ac1c5b6f6e950f15d9a"
+  integrity sha512-Maw8OYPUDxlOzKQd3VMv7T/fmjf2h6BWR3XHkhk3dD3rIfzO7C/UPnzGuTpOGMqw1HCUnctADBbeTNAzAwzUqA==
+  dependencies:
+    "@fastify/static" "^9.0.0"
     fastify-plugin "^5.0.0"
     openapi-types "^12.1.3"
     rfdc "^1.3.1"
@@ -1544,6 +1556,11 @@ content-disposition@^0.5.4:
   integrity sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==
   dependencies:
     safe-buffer "5.2.1"
+
+content-disposition@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-1.0.1.tgz#a8b7bbeb2904befdfb6787e5c0c086959f605f9b"
+  integrity sha512-oIXISMynqSqm241k6kcQ5UwttDILMK4BiurCfGEREw6+X9jkkpEe5T9FZaApyLGGOnFuyMWZpdolTXMtvEJ08Q==
 
 convert-source-map@^2.0.0:
   version "2.0.0"
@@ -2527,6 +2544,15 @@ glob@^11.0.0:
     minimatch "^10.1.1"
     minipass "^7.1.2"
     package-json-from-dist "^1.0.0"
+    path-scurry "^2.0.0"
+
+glob@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-13.0.0.tgz#9d9233a4a274fc28ef7adce5508b7ef6237a1be3"
+  integrity sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA==
+  dependencies:
+    minimatch "^10.1.1"
+    minipass "^7.1.2"
     path-scurry "^2.0.0"
 
 globals@^14.0.0:

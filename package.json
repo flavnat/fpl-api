@@ -24,7 +24,7 @@
     "@fastify/helmet": "^13.0.2",
     "@fastify/rate-limit": "^10.3.0",
     "@fastify/swagger": "^9.6.1",
-    "@fastify/swagger-ui": "^5.2.3",
+    "@fastify/swagger-ui": "^5.2.4",
     "@pothos/core": "^4.10.0",
     "@pothos/plugin-drizzle": "^0.16.1",
     "@types/node": "^22.10.2",
