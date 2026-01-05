@@ -90,18 +90,18 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-1.0.2.tgz#bbe12dca5b4ef983a0d0af4b07b9bc90ea0ababa"
   integrity sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==
 
-"@better-auth/core@1.4.9":
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/@better-auth/core/-/core-1.4.9.tgz#f29e7794f190ce124cbfff82a0d194c5df1e672a"
-  integrity sha512-JT2q4NDkQzN22KclUEoZ7qU6tl9HUTfK1ctg2oWlT87SEagkwJcnrUwS9VznL+u9ziOIfY27P0f7/jSnmvLcoQ==
+"@better-auth/core@1.4.10":
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/@better-auth/core/-/core-1.4.10.tgz#20b611998e3e0007c200f63e6ac072e3ef1dc89d"
+  integrity sha512-AThrfb6CpG80wqkanfrbN2/fGOYzhGladHFf3JhaWt/3/Vtf4h084T6PJLrDE7M/vCCGYvDI1DkvP3P1OB2HAg==
   dependencies:
     "@standard-schema/spec" "^1.0.0"
     zod "^4.1.12"
 
-"@better-auth/telemetry@1.4.9":
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/@better-auth/telemetry/-/telemetry-1.4.9.tgz#152ff598267551044dc76cc825e312b4f7fa98d2"
-  integrity sha512-Tthy1/Gmx+pYlbvRQPBTKfVei8+pJwvH1NZp+5SbhwA6K2EXIaoonx/K6N/AXYs2aKUpyR4/gzqDesDjL7zd6A==
+"@better-auth/telemetry@1.4.10":
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/@better-auth/telemetry/-/telemetry-1.4.10.tgz#4b6df4f20b79ceb566fd13f53297c7a95d6d7dd4"
+  integrity sha512-Dq4XJX6EKsUu0h3jpRagX739p/VMOTcnJYWRrLtDYkqtZFg+sFiFsSWVcfapZoWpRSUGYX9iKwl6nDHn6Ju2oQ==
   dependencies:
     "@better-auth/utils" "0.3.0"
     "@better-fetch/fetch" "1.1.21"
@@ -1299,13 +1299,13 @@ baseline-browser-mapping@^2.9.0:
   resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.11.tgz#53724708c8db5f97206517ecfe362dbe5181deea"
   integrity sha512-Sg0xJUNDU1sJNGdfGWhVHX0kkZ+HWcvmVymJbj6NSgZZmW/8S9Y2HQ5euytnIgakgxN6papOAWiwDo1ctFDcoQ==
 
-better-auth@^1.4.9:
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/better-auth/-/better-auth-1.4.9.tgz#8b5ffebd55a20d90cae9a4efbf0b4fab878eb7c4"
-  integrity sha512-usSdjuyTzZwIvM8fjF8YGhPncxV3MAg3dHUO9uPUnf0yklXUSYISiH1+imk6/Z+UBqsscyyPRnbIyjyK97p7YA==
+better-auth@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/better-auth/-/better-auth-1.4.10.tgz#7bad5b28626e21bf087409fca05b284c6de6bf68"
+  integrity sha512-0kqwEBJLe8eyFzbUspRG/htOriCf9uMLlnpe34dlIJGdmDfPuQISd4shShvUrvIVhPxsY1dSTXdXPLpqISYOYg==
   dependencies:
-    "@better-auth/core" "1.4.9"
-    "@better-auth/telemetry" "1.4.9"
+    "@better-auth/core" "1.4.10"
+    "@better-auth/telemetry" "1.4.10"
     "@better-auth/utils" "0.3.0"
     "@better-fetch/fetch" "1.1.21"
     "@noble/ciphers" "^2.0.0"
