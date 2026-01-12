@@ -133,20 +133,20 @@
     picocolors "^1.0.0"
     sisteransi "^1.0.5"
 
-"@dprint/formatter@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@dprint/formatter/-/formatter-0.3.0.tgz#e374398c8e8d7dbf50e8208c87af44a66de0cb2e"
-  integrity sha512-N9fxCxbaBOrDkteSOzaCqwWjso5iAe+WJPsHC021JfHNj2ThInPNEF13ORDKta3llq5D1TlclODCvOvipH7bWQ==
+"@dprint/formatter@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@dprint/formatter/-/formatter-0.4.1.tgz#06a0f78403464dbda1a5cad07f9a272478cfdb4e"
+  integrity sha512-IB/GXdlMOvi0UhQQ9mcY15Fxcrc2JPadmo6tqefCNV0bptFq7YBpggzpqYXldBXDa04CbKJ+rDwO2eNRPE2+/g==
 
-"@dprint/markdown@^0.17.8":
-  version "0.17.8"
-  resolved "https://registry.yarnpkg.com/@dprint/markdown/-/markdown-0.17.8.tgz#1aea5e903fb700075916e1e070ff0c18de42fc6c"
-  integrity sha512-ukHFOg+RpG284aPdIg7iPrCYmMs3Dqy43S1ejybnwlJoFiW02b+6Bbr5cfZKFRYNP3dKGM86BqHEnMzBOyLvvA==
+"@dprint/markdown@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@dprint/markdown/-/markdown-0.20.0.tgz#6c5be71647f71b82bbef16b31924e8f3bdde886c"
+  integrity sha512-qvynFdQZwul4Y+hoMP02QerEhM5VItb4cO8/qpQrSuQuYvDU+bIseiheVAetSpWlNPBU1JK8bQKloiCSp9lXnA==
 
-"@dprint/toml@^0.6.4":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@dprint/toml/-/toml-0.6.4.tgz#b5412bfacf69bd8759b2486ac284fba6b1fd4b4c"
-  integrity sha512-bZXIUjxr0LIuHWshZr/5mtUkOrnh0NKVZEF6ACojW5z7zkJu7s9sV2mMXm8XQDqN4cJzdHYUYzUyEGdfciaLJA==
+"@dprint/toml@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@dprint/toml/-/toml-0.7.0.tgz#2caacd0be776f5cda6be918923c11855085a8814"
+  integrity sha512-eFaQTcfxKHB+YyTh83x7GEv+gDPuj9q5NFOTaoj5rZmQTbj6OgjjMxUicmS1R8zYcx8YAq5oA9J3YFa5U6x2gA==
 
 "@drizzle-team/brocli@^0.10.2":
   version "0.10.2"
@@ -1926,14 +1926,14 @@ eslint-plugin-es-x@^7.8.0:
     "@eslint-community/regexpp" "^4.11.0"
     eslint-compat-utils "^0.5.1"
 
-eslint-plugin-format@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-format/-/eslint-plugin-format-1.1.0.tgz#6b9abafd245f51526a47a40bb19d951ebee25676"
-  integrity sha512-zjGPZcftddkO9GydBwvTKBV4ICN6a++XK0zIPi3HZHlU8W9EaftTA3XAanJvGAXQUYEqAADtgQi08SX+afbPrg==
+eslint-plugin-format@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-format/-/eslint-plugin-format-1.2.0.tgz#2ad7fd89463a0c402e617af7be777eb930460966"
+  integrity sha512-46iOK4ROUPCEScJ29bWh5LFEkkbnap1LIFJG0sDjsCiNvM8zgY101Kk/OteZ1rpFf0nGxaRGkN6GAkGRE5BFZA==
   dependencies:
-    "@dprint/formatter" "^0.3.0"
-    "@dprint/markdown" "^0.17.8"
-    "@dprint/toml" "^0.6.4"
+    "@dprint/formatter" "^0.4.1"
+    "@dprint/markdown" "^0.20.0"
+    "@dprint/toml" "^0.7.0"
     eslint-formatting-reporter "^0.0.0"
     eslint-parser-plain "^0.1.1"
     prettier "^3.7.4"
