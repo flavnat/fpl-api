@@ -42,7 +42,7 @@
     "pg": "^8.16.3",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.7.3",
-    "undici": "^7.16.0",
+    "undici": "^7.18.2",
     "zod": "^4.2.1"
   },
   "devDependencies": {
