@@ -90,18 +90,18 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-1.0.2.tgz#bbe12dca5b4ef983a0d0af4b07b9bc90ea0ababa"
   integrity sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==
 
-"@better-auth/core@1.4.9":
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/@better-auth/core/-/core-1.4.9.tgz#f29e7794f190ce124cbfff82a0d194c5df1e672a"
-  integrity sha512-JT2q4NDkQzN22KclUEoZ7qU6tl9HUTfK1ctg2oWlT87SEagkwJcnrUwS9VznL+u9ziOIfY27P0f7/jSnmvLcoQ==
+"@better-auth/core@1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@better-auth/core/-/core-1.4.15.tgz#5680fad7cd498265dc8384eabcbe4fdd987a838c"
+  integrity sha512-uAvq8YA7SaS7v+TrvH/Kwt7LAJihzUqB3FX8VweDsqu3gn5t51M+Bve+V1vVWR9qBAtC6cN68V6b+scxZxDY4A==
   dependencies:
     "@standard-schema/spec" "^1.0.0"
     zod "^4.1.12"
 
-"@better-auth/telemetry@1.4.9":
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/@better-auth/telemetry/-/telemetry-1.4.9.tgz#152ff598267551044dc76cc825e312b4f7fa98d2"
-  integrity sha512-Tthy1/Gmx+pYlbvRQPBTKfVei8+pJwvH1NZp+5SbhwA6K2EXIaoonx/K6N/AXYs2aKUpyR4/gzqDesDjL7zd6A==
+"@better-auth/telemetry@1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@better-auth/telemetry/-/telemetry-1.4.15.tgz#57d8d139a420adc442f88f8625e1496fd2bcb264"
+  integrity sha512-7NW/2PS4RN85rv+ozpAezP/kSLPZeWkxqcA6RA/CFXqWp2YR2e5q5E6Hym1qBgVBkoAQa3lWFdX3b+jEs+vvrQ==
   dependencies:
     "@better-auth/utils" "0.3.0"
     "@better-fetch/fetch" "1.1.21"
@@ -1292,28 +1292,28 @@ baseline-browser-mapping@^2.9.0:
   resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.11.tgz#53724708c8db5f97206517ecfe362dbe5181deea"
   integrity sha512-Sg0xJUNDU1sJNGdfGWhVHX0kkZ+HWcvmVymJbj6NSgZZmW/8S9Y2HQ5euytnIgakgxN6papOAWiwDo1ctFDcoQ==
 
-better-auth@^1.4.9:
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/better-auth/-/better-auth-1.4.9.tgz#8b5ffebd55a20d90cae9a4efbf0b4fab878eb7c4"
-  integrity sha512-usSdjuyTzZwIvM8fjF8YGhPncxV3MAg3dHUO9uPUnf0yklXUSYISiH1+imk6/Z+UBqsscyyPRnbIyjyK97p7YA==
+better-auth@^1.4.15:
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/better-auth/-/better-auth-1.4.15.tgz#3a8f5ed4be2b695e2d820fca6b2f5236f9f80769"
+  integrity sha512-XZr4GnFPbjvf8wip8AAjTrpGNn3Sba600zT+DgsR3NNCMWCt9aD8+nuRah6BHwHWnVP1nfnby07tPmti72SRBw==
   dependencies:
-    "@better-auth/core" "1.4.9"
-    "@better-auth/telemetry" "1.4.9"
+    "@better-auth/core" "1.4.15"
+    "@better-auth/telemetry" "1.4.15"
     "@better-auth/utils" "0.3.0"
     "@better-fetch/fetch" "1.1.21"
     "@noble/ciphers" "^2.0.0"
     "@noble/hashes" "^2.0.0"
-    better-call "1.1.7"
+    better-call "1.1.8"
     defu "^6.1.4"
     jose "^6.1.0"
     kysely "^0.28.5"
     nanostores "^1.0.1"
     zod "^4.1.12"
 
-better-call@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/better-call/-/better-call-1.1.7.tgz#87aa2d04e61ca7c27452e764ec839009eead5520"
-  integrity sha512-6gaJe1bBIEgVebQu/7q9saahVzvBsGaByEnE8aDVncZEDiJO7sdNB28ot9I6iXSbR25egGmmZ6aIURXyQHRraQ==
+better-call@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/better-call/-/better-call-1.1.8.tgz#5a2516369daf03f1be4293c8a8b9c65e91ab207f"
+  integrity sha512-XMQ2rs6FNXasGNfMjzbyroSwKwYbZ/T3IxruSS6U2MJRsSYh3wYtG3o6H00ZlKZ/C/UPOAD97tqgQJNsxyeTXw==
   dependencies:
     "@better-auth/utils" "^0.3.0"
     "@better-fetch/fetch" "^1.1.4"
