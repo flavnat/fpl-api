@@ -946,10 +946,10 @@
   resolved "https://registry.yarnpkg.com/@pothos/core/-/core-4.10.0.tgz#e31c9092b1e6f480d3600cfbcdb8dd77b64570d6"
   integrity sha512-spC7v6N80GfDKqt6ZSGELLu7EFDZsuQBb/oCqAtDwAe+HIL5T0STjv220IumLeC8lIAMgTaZMa/WnMNKkawbFg==
 
-"@pothos/plugin-drizzle@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@pothos/plugin-drizzle/-/plugin-drizzle-0.16.1.tgz#f0276d95e381130b2782e14d3a8a80114da9d0ec"
-  integrity sha512-u6eD2OQu9mxUiAWj11nojoEysDUtaVadyfyqrZcWudonx1P6bUcUR/RNsjoi/eyyq2xhk99kRoohL2oXO8DAvA==
+"@pothos/plugin-drizzle@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@pothos/plugin-drizzle/-/plugin-drizzle-0.17.0.tgz#69aa61f1cb732f16259f56556c4b9eddfb6f501f"
+  integrity sha512-nV2KYqnRLjgK6DTUq22SXDtjeeJ/RGJ2VF8U0uTSGfwpmI93LcDkIFJ4hV1Jd3agoNhM3QLY25eZPHczY5XRcA==
 
 "@reporters/github@^1.5.4":
   version "1.11.0"
