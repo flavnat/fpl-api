@@ -970,10 +970,10 @@
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.2.9.tgz#d229a7b7f9dac167a156992ef23c7f023653f53b"
   integrity sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==
 
-"@pothos/core@^4.10.0":
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/@pothos/core/-/core-4.10.0.tgz#e31c9092b1e6f480d3600cfbcdb8dd77b64570d6"
-  integrity sha512-spC7v6N80GfDKqt6ZSGELLu7EFDZsuQBb/oCqAtDwAe+HIL5T0STjv220IumLeC8lIAMgTaZMa/WnMNKkawbFg==
+"@pothos/core@^4.12.0":
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/@pothos/core/-/core-4.12.0.tgz#71f19b9472721e18f045d81e51f1d059bb738221"
+  integrity sha512-PeiODrj3GjQ7Nbs/5p65DEyBWZTSGGjgGO/BgaMEqS1jBNX/2zJTEQJA9zM5uPmCHUCDjE7Qn2U7lOi0ALp/8A==
 
 "@pothos/plugin-drizzle@^0.16.1":
   version "0.16.1"
