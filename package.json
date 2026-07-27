@@ -43,7 +43,7 @@
     "tsc-alias": "^1.8.16",
     "typescript": "^5.7.3",
     "undici": "^7.22.0",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.4.3",
