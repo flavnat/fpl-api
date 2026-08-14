@@ -1,33 +1,30 @@
 {
+  "extends": "fastify-tsconfig",
   "compilerOptions": {
     "target": "esnext",
-    "moduleDetection": "force",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "rootDir": "./",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true,
-    "exactOptionalPropertyTypes": false,
-    "noUncheckedIndexedAccess": true,
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "dist",
-    "sourceMap": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["ESNext"],
+    "noEmit": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-    "noUncheckedSideEffectImports": true,
-    "skipLibCheck": true
+    "erasableSyntaxOnly": true
   },
-  "include": [
-    "src/**/*",
-    "drizzle.config.ts"
-  ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
+  ],
+  "include": [
+    "./src/**/*.ts"
   ]
 }
