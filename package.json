@@ -10,7 +10,11 @@
     "dev": "cross-env NODE_ENV=development node --watch src/index.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "node src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "biome:lint": "biome lint ./src",
+    "biome:format": "biome format ./src --write",
+    "biome:check": "biome check ./src",
+    "biome:check:apply": "biome check ./src --apply"
   },
   "author": "flavnat <natnael01ayele@gmail.com>",
   "license": "MIT",
@@ -23,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "@types/typescript": "^2.0.0",
+    "biome": "^0.3.3",
     "cross-env": "^10.1.0",
     "fastify-tsconfig": "^3.0.0",
     "prettier": "^3.8.3",

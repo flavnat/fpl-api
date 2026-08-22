@@ -5,7 +5,7 @@ import { healthRoutes } from './routes/health.route.ts';
 export function App() {
     const app = Fastify({ logger: true , ajv: {customOptions: {coerceTypes: false, allErrors: true}}}).withTypeProvider<TypeBoxTypeProvider>();
 
-    app.addHook('onRequest', async (request) => {
+    app.addHook('onRequest', async (request: { log: { info: (arg0: string) => void; }; method: any; url: any; }) => {
         request.log.info(`${request.method} ${request.url}`)
     })
 ;
