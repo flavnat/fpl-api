@@ -1,6 +1,10 @@
+
+
 ## FPL API (unofficial) Docs
 
 An unofficial Fantasy Premier League (FPL) API built with Fastify, GraphQL, and PostgreSQL. This API provides comprehensive access to FPL data including players, teams, fixtures, events, and more.
+
+The public GraphQL and REST data endpoints are free and do not require an API key.
 
 ### <a href='https://fpl-api-tau.vercel.app'>Reference Docs</a>
 
